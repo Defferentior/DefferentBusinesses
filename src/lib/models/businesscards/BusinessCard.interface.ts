@@ -7,6 +7,8 @@ export interface BusinessCardInterface {
     builtwith: string | null;
     linkedin: string | null;
     dunandbradsheet: string | null;
+    latitude: number | null;
+    longitude: number | null;
     /*wappalyzer: string;
     crunchbase: string;
     g2: string;

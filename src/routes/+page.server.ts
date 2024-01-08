@@ -1,4 +1,4 @@
-import { db } from "$lib/SupabaseClient";
+import { db } from "$lib/client";
 
 export async function load() {
     const { data } = await db.from("Businesses").select();

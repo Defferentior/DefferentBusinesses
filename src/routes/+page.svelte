@@ -4,7 +4,10 @@
     import BusinessCardsList from "$lib/components/businesscards/BusinessCardsList.component.svelte";
     import defferentiator from '$lib/images/defferentiator-circular-logo-25.png'
 
-    console.log('+page.svelte');
+    let searchTerm = '';
+    $: filteredBusinesses = data.Businesses.filter(business => 
+        business.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
 </script>
 
 <title>{'Defferent Businesses'}</title>
@@ -12,7 +15,8 @@
     <div class="Titlelist">
     <h1>Businesses</h1> <img src={defferentiator} alt={"logo"} class={["logo"].join(' ')} />
     </div>
-    <BusinessCardsList businesscards={data.Businesses} />
+    <input type="text" bind:value={searchTerm} placeholder="Search..." />
+    <BusinessCardsList businesscards={filteredBusinesses} />
 </body>
 
 <style>

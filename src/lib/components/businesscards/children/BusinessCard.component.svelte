@@ -1,6 +1,17 @@
 <script lang="ts"> 
 
     import { type BusinessCardInterface } from "$lib/models";
+    import { onMount } from 'svelte';
+    import path1 from '$lib/images/path1.svg';
+    import path2 from '$lib/images/path2.svg';
+
+    let replacementImage = path1;
+
+    onMount(() => {
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            replacementImage = path2;
+        }
+      });
 
     export let businesscard : BusinessCardInterface = {
         id: '0',
@@ -11,6 +22,8 @@
         builtwith: '',
         linkedin: '',
         dunandbradsheet: '',
+        latitude: null,
+        longitude: null,
         /*wappalyzer: '',
         crunchbase: '',
         g2: '',
@@ -22,12 +35,14 @@
         googleplay: ''*/
     };
 
+    let mapContainer: any;
+
 </script>
 
 <div class="businesscard">
     <div class="businesscard-header">
       <h2>
-        <a class="businesscard-head-link" href={businesscard.url}>
+        <a class="businesscard-head-link" style="text-decoration: none;" href={businesscard.url}>
           {businesscard.name}
         </a>
       </h2>
@@ -43,7 +58,12 @@
             <a class={["businesscard-link","dnbshow"].join(' ')} href={businesscard.dunandbradsheet}>Dun & Bradstreet</a>
         {/if}
     </div>
+    {#if !businesscard.image}
+    <img src={replacementImage} alt={businesscard.name} class={["businesscard-image","imgshow"].join(' ')} />
+    {/if}
+    {#if businesscard.image}
     <img src={businesscard.image} alt={businesscard.name} class={["businesscard-image","imgshow"].join(' ')} />
+    {/if}
 </div>
 
 <style>
@@ -147,8 +167,13 @@
     transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
   }
 
-  .businesscard-header:hover,
-  .businesscard-header:focus {
+  .businesscard-head-link {
+    color: #9c9a50; /* Paler gold links */
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+  }
+
+  .businesscard-head-link:hover,
+  .businesscard-head-link:focus {
     background-color: var(--link-hover-background);
     color: var(--link-hover-color);
     text-decoration: none; /* Optional: remove if you want underline on hover */
