@@ -7,6 +7,7 @@
     console.log('+page.svelte');
 </script>
 
+<title>{'Defferent Businesses'}</title>
 <body id="root">
     <div class="Titlelist">
     <h1>Businesses</h1> <img src={defferentiator} alt={"logo"} class={["logo"].join(' ')} />
