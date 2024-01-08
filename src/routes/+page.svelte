@@ -3,6 +3,8 @@
 
     import BusinessCardsList from "$lib/components/businesscards/BusinessCardsList.component.svelte";
     import defferentiator from '$lib/images/defferentiator-circular-logo-25.png'
+
+    console.log('+page.svelte');
 </script>
 
 <body id="root">
