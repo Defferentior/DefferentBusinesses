@@ -1,10 +1,9 @@
 import { createClient } from "@supabase/supabase-js";
 import type { Database } from "./SupabaseTypes"; // our generated types
-import dotenv from 'dotenv';
+import { env } from '$env/dynamic/private';
 
-dotenv.config();
 
 export const db = createClient<Database>(
-    process.env.SUPABASE_URL,
-    process.env.SUPABASE_ACCESS_TOKEN
+    env.SUPABASE_URL,
+    env.SUPABASE_ACCESS_TOKEN
 )
