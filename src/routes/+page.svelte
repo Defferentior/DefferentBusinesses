@@ -1,9 +1,9 @@
 <script lang="ts">
     export let data;
+
+    import BusinessCardsList from "$lib/components/businesscards/BusinessCardsList.component.svelte";
 </script>
 
 <h1>Defferent Businesses</h1>
 
-{#each data.Businesses as { name }}
-    <h2>{name}</h2>
-{/each}
+<BusinessCardsList businesscards={data.Businesses} />

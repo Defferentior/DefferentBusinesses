@@ -1,7 +1,6 @@
-import { db } from "$lib/supabaseClient";
+import { db } from "$lib/SupabaseClient";
 
 export async function load() {
-    console.log('testing')
     const { data } = await db.from("Businesses").select();
     return {
       Businesses: data ?? [],
