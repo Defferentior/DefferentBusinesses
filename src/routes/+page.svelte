@@ -6,7 +6,6 @@
 
     let searchTerm = '';
     let filterLinkedin = false;
-    let filterLocation = false;
     let filterImage = false;
     $: filteredBusinesses = data.Businesses.filter(business => 
         business.name.toLowerCase().includes(searchTerm.toLowerCase()) 
@@ -20,7 +19,7 @@
     <div class="Titlelist">
     <h1>Businesses</h1> <img src={defferentiator} alt={"logo"} class={["logo"].join(' ')} />
     </div> 
-    <h3>Filter Out Businesses Without:  </h3>
+    <h3>Include Businesses With:  </h3>
     <div>
       <input type="checkbox" bind:checked={filterLinkedin} /> LinkedIn
       <input type="checkbox" bind:checked={filterImage} /> Picture |
