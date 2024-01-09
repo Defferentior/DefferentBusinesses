@@ -7,12 +7,6 @@
 
     let replacementImage = path1;
 
-    onMount(() => {
-        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-            replacementImage = path2;
-        }
-      });
-
     export let businesscard : BusinessCardInterface = {
         id: '0',
         name: '',
@@ -49,11 +43,11 @@
     </div>
     <div class="businesscard-links">
         <a class="businesscard-link" href={businesscard.url || undefined}>Website</a>
+        {#if businesscard.linkedin}
+          <a class={["businesscard-link","linkinshow"].join(' ')} href={businesscard.linkedin}>LinkedIn</a>
+        {/if}
         <a class="businesscard-link" href={businesscard.similarweb}>SimilarWeb</a>
         <a class="businesscard-link" href={businesscard.builtwith}>BuiltWith</a>
-        {#if businesscard.linkedin}
-            <a class={["businesscard-link","linkinshow"].join(' ')} href={businesscard.linkedin}>LinkedIn</a>
-        {/if}
         {#if businesscard.dunandbradsheet}
             <a class={["businesscard-link","dnbshow"].join(' ')} href={businesscard.dunandbradsheet}>Dun & Bradstreet</a>
         {/if}
@@ -77,7 +71,7 @@
                       "image links links links";
   grid-template-columns: min(20%,200px) 1fr auto;
   grid-template-rows: auto auto;
-  margin: .5em;
+  margin: .25rem;
   padding: .35rem;
   min-height: 150px;
   min-height: 200px;

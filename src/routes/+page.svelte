@@ -33,6 +33,7 @@
 #root {
   max-width: 850px;
   margin: auto auto;
+  --side-margin: 1rem;
   text-align: center;
 }
 
