@@ -10,8 +10,7 @@
     let filterImage = false;
     $: filteredBusinesses = data.Businesses.filter(business => 
         business.name.toLowerCase().includes(searchTerm.toLowerCase()) 
-        && (!filterLinkedin || business.linkedin !== null) 
-        && (!filterLocation || business.longitude !== null || business.latitude !== null)
+        && (!filterLinkedin || business.linkedin !== null)
         && (!filterImage || business.image !== null)
     );
 </script>
@@ -22,11 +21,9 @@
     <h1>Businesses</h1> <img src={defferentiator} alt={"logo"} class={["logo"].join(' ')} />
     </div> 
     <h3>Filter Out Businesses Without:  </h3>
-    <div><label>
+    <div>
       <input type="checkbox" bind:checked={filterLinkedin} /> LinkedIn
-      <input type="checkbox" bind:checked={filterImage} /> Picture
-      <input type="checkbox" bind:checked={filterLocation} /> Location |
-    </label>
+      <input type="checkbox" bind:checked={filterImage} /> Picture |
     <input type="text" bind:value={searchTerm} placeholder="Search..." /> Name
   </div>
     <BusinessCardsList businesscards={filteredBusinesses} />
