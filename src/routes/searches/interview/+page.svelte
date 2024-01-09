@@ -15,10 +15,14 @@
 </script>
 
 <title>{'Defferent Businesses'}</title>
+
 <body id="root">
     <div class="Titlelist">
     <h1>Businesses</h1> <img src={defferentiator} alt={"logo"} class={["logo"].join(' ')} />
     </div> 
+    
+    <a href={'/searches/interview/'} class="businesscard-link"> Previous</a>
+
     <h3>Include Businesses With:  </h3>
     <div>
       <input type="checkbox" bind:checked={filterLinkedin} /> LinkedIn

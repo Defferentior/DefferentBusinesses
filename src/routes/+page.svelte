@@ -19,13 +19,18 @@
     <div class="Titlelist">
     <h1>Businesses</h1> <img src={defferentiator} alt={"logo"} class={["logo"].join(' ')} />
     </div> 
-    <h3>Include Businesses With:  </h3>
+    <h3>Only Include Businesses With:  </h3>
     <div>
       <input type="checkbox" bind:checked={filterLinkedin} /> LinkedIn
       <input type="checkbox" bind:checked={filterImage} /> Picture |
     <input type="text" bind:value={searchTerm} placeholder="Search..." /> Name
   </div>
     <BusinessCardsList businesscards={filteredBusinesses} />
+
+    <div class="contactbar">
+    <address> <a href="mailto:timemctigue@gmail.com">E-Mail</a></address>
+    <address> <a href="https://www.linkedin.com/in/timothy-mctigue-30507429a/">Linkedin</a></address>
+  </div>
 </body>
 
 <style>
@@ -44,6 +49,19 @@
   margin: 0 auto;
   padding: 0;
   list-style: none;
+}
+
+.contactbar{
+  display: flex;
+  flex-wrap: flex-start;
+  justify-content: center;
+  margin: 0 2em;
+  list-style: none;
+
+}
+
+.contactbar address {
+    margin: 0 .25em;
 }
 
 .logo {
