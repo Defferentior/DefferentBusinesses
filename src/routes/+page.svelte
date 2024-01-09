@@ -24,7 +24,6 @@
 #root {
   max-width: 850px;
   margin: auto auto;
-  padding: .5rem;
   text-align: center;
 }
 
