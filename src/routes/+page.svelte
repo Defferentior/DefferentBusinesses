@@ -5,8 +5,10 @@
     import defferentiator from '$lib/images/defferentiator-circular-logo-25.png'
 
     let searchTerm = '';
+    let filterLinkedin = false;
+    let filterLocation = false;
     $: filteredBusinesses = data.Businesses.filter(business => 
-        business.name.toLowerCase().includes(searchTerm.toLowerCase())
+        business.name.toLowerCase().includes(searchTerm.toLowerCase()) && (!filterLinkedin || business.linkedin !== null) && (!filterLocation || business.longitude !== null || business.latitude !== null)
     );
 </script>
 
@@ -14,8 +16,14 @@
 <body id="root">
     <div class="Titlelist">
     <h1>Businesses</h1> <img src={defferentiator} alt={"logo"} class={["logo"].join(' ')} />
-    </div>
-    <input type="text" bind:value={searchTerm} placeholder="Search..." />
+    </div> 
+    <h3>Filter Out Businesses Without:  </h3>
+    <div><label>
+      <input type="checkbox" bind:checked={filterLinkedin} /> LinkedIn
+      <input type="checkbox" bind:checked={filterLocation} /> Location |
+    </label>
+    <input type="text" bind:value={searchTerm} placeholder="Search..." /> Name
+  </div>
     <BusinessCardsList businesscards={filteredBusinesses} />
 </body>
 

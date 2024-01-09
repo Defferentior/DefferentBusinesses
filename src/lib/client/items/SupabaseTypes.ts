@@ -14,7 +14,6 @@ export interface Database {
           builtwith: string | null
           craft: string | null
           dunandbradsheet: string | null
-          Headquarters: unknown | null
           id: string
           image: string | null
           latitude: number | null
@@ -29,7 +28,6 @@ export interface Database {
           builtwith?: string | null
           craft?: string | null
           dunandbradsheet?: string | null
-          Headquarters?: unknown | null
           id?: string
           image?: string | null
           latitude?: number | null
@@ -44,7 +42,6 @@ export interface Database {
           builtwith?: string | null
           craft?: string | null
           dunandbradsheet?: string | null
-          Headquarters?: unknown | null
           id?: string
           image?: string | null
           latitude?: number | null
