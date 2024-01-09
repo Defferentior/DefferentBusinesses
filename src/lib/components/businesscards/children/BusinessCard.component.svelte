@@ -77,15 +77,15 @@
                       "image links links links";
   grid-template-columns: min(20%,200px) 1fr auto;
   grid-template-rows: auto auto;
-  margin: 1em;
-  padding: .5rem;
+  margin: .5em;
+  padding: .35rem;
   min-height: 150px;
   min-height: 200px;
   max-height: 250px;
   max-width: 800px;
   position: relative;
   text-align: left;
-  border-radius: 1em;
+  border-radius: .25em;
 }
 
 .businesscard-header {
