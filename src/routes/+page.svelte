@@ -10,13 +10,15 @@
     let page = 0;
     const pageSize = 50;
 
-    let maxPage = Math.floor(data.Businesses.length / pageSize);
-
     $: filteredBusinesses = data.Businesses.filter(business => 
         business.name.toLowerCase().includes(searchTerm.toLowerCase()) 
         && (!filterLinkedin || business.linkedin !== null)
         && (!filterImage || business.image !== null)
     );
+
+    $: maxPage = Math.floor(filteredBusinesses.length / pageSize);
+
+    $: if (page > maxPage) page = maxPage;
 
     $: paginatedBusinesses = filteredBusinesses.slice(page * pageSize, (page + 1) * pageSize);
 
