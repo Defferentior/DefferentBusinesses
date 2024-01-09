@@ -3,7 +3,6 @@
     import { type BusinessCardInterface } from "$lib/models";
     import { onMount } from 'svelte';
     import path1 from '$lib/images/path1.svg';
-    import path2 from '$lib/images/path2.svg';
 
     let replacementImage = path1;
 

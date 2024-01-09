@@ -48,9 +48,9 @@
     </div> 
     <h3>Only Include Businesses With:  </h3>
     <div>
-      <input type="checkbox" bind:checked={filterLinkedin} /> LinkedIn
-      <input type="checkbox" bind:checked={filterImage} /> Picture |
-    <input type="text" bind:value={searchTerm} placeholder="Search..." /> Name
+      <input name="linkedincheckbox" type="checkbox" bind:checked={filterLinkedin} /> LinkedIn
+      <input name="imagecheckbox" type="checkbox" bind:checked={filterImage} /> Picture |
+    <input name="namesearch" type="text" bind:value={searchTerm} placeholder="Search..." /> Name
   </div>
 
   <div class = "Navigation-Top">
@@ -138,8 +138,11 @@
 }
 
 .logo {
-  max-width: 3em;
-  padding: 1em;
+  max-height: 2em;
+  max-width: 2em;
+  padding-top: 1.5em;
+  padding-left: 1em;
+  position: center;
 }
 
 
