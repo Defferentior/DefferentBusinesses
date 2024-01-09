@@ -7,8 +7,12 @@
     let searchTerm = '';
     let filterLinkedin = false;
     let filterLocation = false;
+    let filterImage = false;
     $: filteredBusinesses = data.Businesses.filter(business => 
-        business.name.toLowerCase().includes(searchTerm.toLowerCase()) && (!filterLinkedin || business.linkedin !== null) && (!filterLocation || business.longitude !== null || business.latitude !== null)
+        business.name.toLowerCase().includes(searchTerm.toLowerCase()) 
+        && (!filterLinkedin || business.linkedin !== null) 
+        && (!filterLocation || business.longitude !== null || business.latitude !== null)
+        && (!filterImage || business.image !== null)
     );
 </script>
 
@@ -20,6 +24,7 @@
     <h3>Filter Out Businesses Without:  </h3>
     <div><label>
       <input type="checkbox" bind:checked={filterLinkedin} /> LinkedIn
+      <input type="checkbox" bind:checked={filterImage} /> Picture
       <input type="checkbox" bind:checked={filterLocation} /> Location |
     </label>
     <input type="text" bind:value={searchTerm} placeholder="Search..." /> Name
