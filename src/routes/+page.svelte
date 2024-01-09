@@ -7,11 +7,30 @@
     let searchTerm = '';
     let filterLinkedin = false;
     let filterImage = false;
+    let page = 0;
+    const pageSize = 50;
+
+    let maxPage = Math.floor(data.Businesses.length / pageSize);
+
     $: filteredBusinesses = data.Businesses.filter(business => 
         business.name.toLowerCase().includes(searchTerm.toLowerCase()) 
         && (!filterLinkedin || business.linkedin !== null)
         && (!filterImage || business.image !== null)
     );
+
+    $: paginatedBusinesses = filteredBusinesses.slice(page * pageSize, (page + 1) * pageSize);
+
+    function nextPage() {
+        page += 1;
+    }
+    function previousPage() {
+        page -= 1;
+    }
+
+    function startPage() {
+      page = 0;
+    }
+
 </script>
 
 <title>{'Defferent Businesses'}</title>
@@ -25,7 +44,32 @@
       <input type="checkbox" bind:checked={filterImage} /> Picture |
     <input type="text" bind:value={searchTerm} placeholder="Search..." /> Name
   </div>
-    <BusinessCardsList businesscards={filteredBusinesses} />
+
+  <div class = "Navigation-Top">
+    {#if page != 0}
+      <button on:click={startPage}>Start</button>
+    {/if}
+    {#if page > 0}
+      <button on:click={previousPage}>Previous</button>
+    {/if}
+    {#if page < maxPage}
+      <button on:click={nextPage}>Next</button>
+    {/if}
+  </div>
+
+  <BusinessCardsList businesscards={paginatedBusinesses} />
+
+  <div class = "Navigation">
+    {#if page != 0}
+      <button on:click={startPage}>Start</button>
+    {/if}
+    {#if page > 0}
+      <button on:click={previousPage}>Previous</button>
+    {/if}
+    {#if page < maxPage}
+      <button on:click={nextPage}>Next</button>
+    {/if}
+  </div>
 
     <div class="contactbar">
     <address> <a href="mailto:timemctigue@gmail.com">E-Mail</a></address>
@@ -51,12 +95,33 @@
   list-style: none;
 }
 
+.Navigation {
+  display: flex;
+  flex-wrap: flex-start;
+  justify-content: center;
+  margin: .5em auto;
+  padding: 0;
+  list-style: none;
+}
+
+.Navigation-Top{
+  display: flex;
+  flex-wrap: flex-start;
+  justify-content: center;
+  margin: 0 auto;
+  margin-top: .5em;
+  padding: 0;
+  list-style: none;
+
+}
+
 .contactbar{
   display: flex;
   flex-wrap: flex-start;
   justify-content: center;
   margin: 0 2em;
   list-style: none;
+  margin-bottom: .25em;
 
 }
 
