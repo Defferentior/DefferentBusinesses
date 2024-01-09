@@ -7,17 +7,10 @@
 
     export let businesscards : BusinessCardInterface[] = [];
 
-    $: sortedBusinesscards = [...businesscards].sort((a, b) => {
-        if (a.image === null) return 1;
-        if (b.image === null) return -1;
-        return a.image.localeCompare(b.image);
-    });
-
-
 </script>
 
 <div class="businesscards">
-    {#each sortedBusinesscards as businesscard}
+    {#each businesscards as businesscard}
         <BusinessCard businesscard={businesscard} />
     {/each}
 </div>

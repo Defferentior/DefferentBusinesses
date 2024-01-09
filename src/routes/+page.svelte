@@ -10,7 +10,13 @@
     let page = 0;
     const pageSize = 50;
 
-    $: filteredBusinesses = data.Businesses.filter(business => 
+  $: sortedBusinesses = [...data.Businesses].sort((a, b) => {
+    if (a.image === null) return 1;
+    if (b.image === null) return -1;
+    return a.image.localeCompare(b.image);
+  });
+
+    $: filteredBusinesses = sortedBusinesses.filter(business => 
         business.name.toLowerCase().includes(searchTerm.toLowerCase()) 
         && (!filterLinkedin || business.linkedin !== null)
         && (!filterImage || business.image !== null)
