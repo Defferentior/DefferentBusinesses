@@ -8,7 +8,7 @@
     let filterLinkedin = false;
     let filterImage = false;
     let page = 1;
-    const pageSize = 30;
+    const pageSize = 20;
 
   $: sortedBusinesses = [...data.Businesses].sort((a, b) => {
     if (a.image === null) return 1;
@@ -69,17 +69,15 @@
   
   <div class="PageNumbers">
     {#each pages as pageNumber (pageNumber)}
-      {#if pageNumber <= maxPage}
-        {#if pageNumber != page && (pageNumber === 1 || pageNumber === maxPage || (pageNumber >= page - 2 && pageNumber <= page + 2))}
-          <button on:click={() => goToPage(pageNumber)}>{pageNumber}</button>
-        {:else if pageNumber === page }
-          <button class="current-page" on:click={() => goToPage(pageNumber)}>{pageNumber}</button>
-        {:else if (pageNumber === page - 3 || pageNumber === page + 3)}
-          {#if showInput === pageNumber}
-              <input class="GoTo" type="text" bind:value={inputPageNumber} on:blur={goToInputPageNumber} on:keydown={handleKeyPress} />
-          {:else}
-            <button on:click={() => {showInput = pageNumber;}} on:keydown={(event) => {if (event.key === 'Enter') {showInput = pageNumber;}}} style="cursor:pointer;">...</button>
-          {/if}
+      {#if pageNumber != page && (pageNumber === 1 || pageNumber === maxPage || (pageNumber >= page - 2 && pageNumber <= page + 2 && pageNumber <= maxPage))}
+        <button on:click={() => goToPage(pageNumber)}>{pageNumber}</button>
+      {:else if pageNumber === page }
+        <button class="current-page" on:click={() => goToPage(pageNumber)}>{pageNumber}</button>
+      {:else if (pageNumber === page - 3 || pageNumber === page + 3 && pageNumber <= maxPage)}
+        {#if showInput === pageNumber}
+            <input class="GoTo" type="number" bind:value={inputPageNumber} on:blur={goToInputPageNumber} on:keydown={handleKeyPress} />
+        {:else}
+          <button on:click={() => {showInput = pageNumber;}} on:keydown={(event) => {if (event.key === 'Enter') {showInput = pageNumber;}}} style="cursor:pointer;">...</button>
         {/if}
       {/if}
     {/each}
@@ -96,7 +94,7 @@
           <button class="current-page" on:click={() => goToPage(pageNumber)}>{pageNumber}</button>
         {:else if (pageNumber === page - 3 || pageNumber === page + 3)}
           {#if showInput === pageNumber}
-              <input class="GoTo" type="text" bind:value={inputPageNumber} on:blur={goToInputPageNumber} on:keydown={handleKeyPress} />
+              <input class="GoTo" type="number" bind:value={inputPageNumber} on:blur={goToInputPageNumber} on:keydown={handleKeyPress} />
           {:else}
             <button on:click={() => {showInput = pageNumber;}} on:keydown={(event) => {if (event.key === 'Enter') {showInput = pageNumber;}}} style="cursor:pointer;">...</button>
           {/if}
@@ -162,7 +160,7 @@
   }
 
   .GoTo {
-    width: 1.5em; /* Adjust as needed */
+    width: 3em; /* Adjust as needed */
     text-align: center;
   }
 
