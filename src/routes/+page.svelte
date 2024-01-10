@@ -24,7 +24,7 @@
 
     $: maxPage = Math.ceil(filteredBusinesses.length / pageSize);
 
-    $: if (page > maxPage) page = maxPage;
+    $: if (page > maxPage && maxPage > 0) page = maxPage;
 
     $: paginatedBusinesses = filteredBusinesses.slice((page - 1) * pageSize, (page) * pageSize);
 
@@ -200,7 +200,7 @@
     justify-content: center;
     margin: 0 2em;
     list-style: none;
-    margin-bottom: .25em;
+    margin-bottom: .5em;
   }
 
   .contactbar address {
