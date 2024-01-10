@@ -75,7 +75,7 @@
   min-height: 150px;
   min-height: 200px;
   max-height: 250px;
-  max-width: 800px;
+  max-width: 850px;
   position: relative;
   text-align: left;
   border-radius: .25em;

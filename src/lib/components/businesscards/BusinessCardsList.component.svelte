@@ -19,6 +19,5 @@
     .businesscards {
         display: flex;
         flex-direction: column;
-        margin-top: .5em;
     }
 </style>

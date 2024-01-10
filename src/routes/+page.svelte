@@ -7,8 +7,8 @@
     let searchTerm = '';
     let filterLinkedin = false;
     let filterImage = false;
-    let page = 0;
-    const pageSize = 50;
+    let page = 1;
+    const pageSize = 25;
 
   $: sortedBusinesses = [...data.Businesses].sort((a, b) => {
     if (a.image === null) return 1;
@@ -22,11 +22,34 @@
         && (!filterImage || business.image !== null)
     );
 
-    $: maxPage = Math.floor(filteredBusinesses.length / pageSize);
+    $: maxPage = Math.ceil(filteredBusinesses.length / pageSize);
 
     $: if (page > maxPage) page = maxPage;
 
-    $: paginatedBusinesses = filteredBusinesses.slice(page * pageSize, (page + 1) * pageSize);
+    $: paginatedBusinesses = filteredBusinesses.slice((page - 1) * pageSize, (page) * pageSize);
+
+    $: pages = Array.from({length: maxPage + 1}, (_, i) => i + 1);
+
+    function goToPage(pageNumber: number) {
+        page = pageNumber;
+    }
+
+    let showInput: number | null = null;
+    let inputPageNumber = '';
+
+    function goToInputPageNumber() {
+        const pageNumber = parseInt(inputPageNumber);
+        if (!isNaN(pageNumber) && pageNumber >= 0 && pageNumber <= maxPage) {
+            page = pageNumber;
+        }
+        showInput = null;
+    }
+
+    function handleKeyPress(event: { key: string; }) {
+        if (event.key === 'Enter') {
+            goToInputPageNumber();
+        }
+    }
 
     function nextPage() {
         page += 1;
@@ -36,7 +59,7 @@
     }
 
     function startPage() {
-      page = 0;
+      page = 1;
     }
 
 </script>
@@ -52,34 +75,62 @@
       <input name="imagecheckbox" type="checkbox" bind:checked={filterImage} /> Picture |
     <input name="namesearch" type="text" bind:value={searchTerm} placeholder="Search..." /> Name
   </div>
-
-  <div class = "Navigation-Top">
-    {#if page != 0}
-      <button on:click={startPage}>Start</button>
-    {/if}
-    {#if page > 0}
-      <button on:click={previousPage}>Previous</button>
-    {/if}
-    {#if page < maxPage}
-      <button on:click={nextPage}>Next</button>
-    {/if}
+    
+  <div class="PageNumbers">
+    {#each pages as pageNumber (pageNumber)}
+      {#if pageNumber <= maxPage}
+        {#if pageNumber != page && (pageNumber === 1 || pageNumber === maxPage || (pageNumber >= page - 2 && pageNumber <= page + 2))}
+          <button on:click={() => goToPage(pageNumber)}>{pageNumber}</button>
+        {:else if pageNumber === page }
+          <button class="current-page" on:click={() => goToPage(pageNumber)}>{pageNumber}</button>
+        {:else if (pageNumber === page - 3 || pageNumber === page + 3)}
+          {#if showInput === pageNumber}
+              <input class="GoTo" type="text" bind:value={inputPageNumber} on:blur={goToInputPageNumber} on:keydown={handleKeyPress} />
+          {:else}
+            <button on:click={() => {showInput = pageNumber;}} on:keydown={(event) => {if (event.key === 'Enter') {showInput = pageNumber;}}} style="cursor:pointer;">...</button>
+          {/if}
+        {/if}
+      {/if}
+    {/each}
   </div>
 
   <BusinessCardsList businesscards={paginatedBusinesses} />
 
   <div class = "Navigation">
-    {#if page != 0}
-      <button on:click={startPage}>Start</button>
-    {/if}
-    {#if page > 0}
-      <button on:click={previousPage}>Previous</button>
-    {/if}
-    {#if page < maxPage}
-      <button on:click={nextPage}>Next</button>
-    {/if}
+    <div>
+      {#if page != 1}
+        <button on:click={startPage}>Start</button>
+      {/if}
+      {#if page > 0}
+        <button on:click={previousPage}>Previous</button>
+      {/if}
+      {#if page < maxPage}
+        <button on:click={nextPage}>Next</button>
+      {/if}
+    </div>
   </div>
 
-    <div class="contactbar">
+  <div class="PageNumbers">
+    {#each pages as pageNumber (pageNumber)}
+      {#if pageNumber <= maxPage}
+        {#if pageNumber != page && (pageNumber === 1 || pageNumber === maxPage || (pageNumber >= page - 2 && pageNumber <= page + 2))}
+          <button on:click={() => goToPage(pageNumber)}>{pageNumber}</button>
+        {:else if pageNumber === page }
+          <button class="current-page" on:click={() => goToPage(pageNumber)}>{pageNumber}</button>
+        {:else if (pageNumber === page - 3 || pageNumber === page + 3)}
+          {#if showInput === pageNumber}
+              <input class="GoTo" type="text" bind:value={inputPageNumber} on:blur={goToInputPageNumber} on:keydown={handleKeyPress} />
+          {:else}
+            <button on:click={() => {showInput = pageNumber;}} on:keydown={(event) => {if (event.key === 'Enter') {showInput = pageNumber;}}} style="cursor:pointer;">...</button>
+          {/if}
+        {/if}
+      {/if}
+    {/each}
+  </div>
+
+
+
+  <div class="contactbar">
     <address> <a href="mailto:timemctigue@gmail.com">E-Mail</a></address>
     <address> <a href="https://www.linkedin.com/in/timothy-mctigue-30507429a/">Linkedin</a></address>
   </div>
@@ -87,79 +138,106 @@
 
 <style>
 
-#root {
-  max-width: 850px;
-  margin: auto auto;
-  --side-margin: 1rem;
-  text-align: center;
-}
+  #root {
+    max-width: 850px;
+    margin: auto auto;
+    --side-margin: 1rem;
+    text-align: center;
+  }
 
-.Titlelist {
-  display: flex;
-  flex-wrap: flex-start;
-  justify-content: center;
-  margin: 0 auto;
-  padding: 0;
-  list-style: none;
-}
+  .Titlelist {
+    display: flex;
+    flex-wrap: flex-start;
+    justify-content: center;
+    margin: 0 auto;
+    padding: 0;
+    list-style: none;
+  }
 
-.Navigation {
-  display: flex;
-  flex-wrap: flex-start;
-  justify-content: center;
-  margin: .5em auto;
-  padding: 0;
-  list-style: none;
-}
+  .Navigation {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+  }
 
-.Navigation-Top{
-  display: flex;
-  flex-wrap: flex-start;
-  justify-content: center;
-  margin: 0 auto;
-  margin-top: .5em;
-  padding: 0;
-  list-style: none;
+  .PageNumbers {
+      display: flex;
+      gap: 5px;
+      justify-content: center;
+  }
 
-}
+  .PageNumbers button {
+    padding: 5px;
+    border: none;
+    background-color: transparent;
+    text-decoration: underline;
+    cursor: pointer;
+  }
 
-.contactbar{
-  display: flex;
-  flex-wrap: flex-start;
-  justify-content: center;
-  margin: 0 2em;
-  list-style: none;
-  margin-bottom: .25em;
+  .PageNumbers button:hover {
+      color: #0056b3;
+  }
 
-}
+  .PageNumbers button.current-page {
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.2em;
+  }
 
-.contactbar address {
-    margin: 0 .25em;
-}
+  .GoToPage {
+      display: flex;
+      gap: 5px;
+  }
 
-.logo {
-  max-height: 2em;
-  max-width: 2em;
-  padding-top: 1.5em;
-  padding-left: 1em;
-  position: center;
-}
+  .GoTo {
+    width: 1.5em; /* Adjust as needed */
+    text-align: center;
+  }
 
+  .contactbar{
+    display: flex;
+    flex-wrap: flex-start;
+    justify-content: center;
+    margin: 0 2em;
+    list-style: none;
+    margin-bottom: .25em;
+  }
 
-    @media (prefers-color-scheme: dark) {
-  :root {
-    --image-background: #4f7565; /* Dark mode image background */
-    --link-hover-background: #50655e; /* Darker green background on hover */
-    --link-hover-color: #e0d068; /* Lighter gold color on hover */
+  .contactbar address {
+      margin: 0 .25em;
+  }
+
+  .logo {
+    max-height: 3em;
+    max-width: 3em;
+    padding-top: 1em;
+    padding-left: 1em;
+    padding-right: 1em;
+    position: center;
   }
 
 
-  body {
-    background: #2e433a; /* Muted dark green background */
-    color: #c5b358; /* Softer gold text */
-  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --image-background: #4f7565; /* Dark mode image background */
+      --link-hover-background: #50655e; /* Darker green background on hover */
+      --link-hover-color: #e0d068; /* Lighter gold color on hover */
+    }
 
-}
+    body {
+      background: #2e433a; /* Muted dark green background */
+      color: #c5b358; /* Softer gold text */
+    }
+
+    .PageNumbers button {
+      color: #c5b358;
+    }
+
+    address a {
+      color: #757340;
+    }
+
+  }
 
 @media (prefers-color-scheme: light) {
   :root {
@@ -171,6 +249,14 @@
   body {
     background: #d6e8d4; /* Less pastel, more subdued green background */
     color: #757340; /* Darker gold text for better readability */
+  }
+
+  .PageNumbers button {
+    color: #757340;
+    }
+
+  address a {
+    color: #757340;
   }
 
 }
