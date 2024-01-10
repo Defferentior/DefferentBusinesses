@@ -8,7 +8,7 @@
     let filterLinkedin = false;
     let filterImage = false;
     let page = 1;
-    const pageSize = 25;
+    const pageSize = 30;
 
   $: sortedBusinesses = [...data.Businesses].sort((a, b) => {
     if (a.image === null) return 1;
@@ -51,17 +51,6 @@
         }
     }
 
-    function nextPage() {
-        page += 1;
-    }
-    function previousPage() {
-        page -= 1;
-    }
-
-    function startPage() {
-      page = 1;
-    }
-
 </script>
 
 <title>{'Defferent Businesses'}</title>
@@ -75,7 +64,9 @@
       <input name="imagecheckbox" type="checkbox" bind:checked={filterImage} /> Picture |
     <input name="namesearch" type="text" bind:value={searchTerm} placeholder="Search..." /> Name
   </div>
-    
+
+  <a href="/secret/stash" class="secret-link">Secrets Stash</a>
+  
   <div class="PageNumbers">
     {#each pages as pageNumber (pageNumber)}
       {#if pageNumber <= maxPage}
@@ -95,20 +86,6 @@
   </div>
 
   <BusinessCardsList businesscards={paginatedBusinesses} />
-
-  <div class = "Navigation">
-    <div>
-      {#if page != 1}
-        <button on:click={startPage}>Start</button>
-      {/if}
-      {#if page > 0}
-        <button on:click={previousPage}>Previous</button>
-      {/if}
-      {#if page < maxPage}
-        <button on:click={nextPage}>Next</button>
-      {/if}
-    </div>
-  </div>
 
   <div class="PageNumbers">
     {#each pages as pageNumber (pageNumber)}
@@ -154,11 +131,6 @@
     list-style: none;
   }
 
-  .Navigation {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-  }
 
   .PageNumbers {
       display: flex;
@@ -215,6 +187,13 @@
     padding-right: 1em;
     position: center;
   }
+  .secret-link {
+    position: fixed;
+    right: 10px;
+    top: 30%;
+    font-size: 12px;
+    opacity: 0;
+  }
 
 
   @media (prefers-color-scheme: dark) {
@@ -258,6 +237,7 @@
   address a {
     color: #757340;
   }
+  
 
 }
 
