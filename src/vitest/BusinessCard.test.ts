@@ -48,7 +48,7 @@ describe('List Tests', () => {
       expect(document.querySelector('div')).not.toBe(null);
     })
     it('div has proper classname', () => {
-      //const div = document.querySelector('div');
+      const div = document.querySelector('div');
       expect(div).not.toBe(null);
       if(div)
       {

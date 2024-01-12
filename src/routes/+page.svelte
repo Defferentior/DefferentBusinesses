@@ -4,11 +4,25 @@
     import BusinessCardsList from "$lib/components/businesscards/BusinessCardsList.component.svelte";
     import defferentiator from '$lib/images/defferentiator-circular-logo-25.png'
 
+    import PageNumbers from "$lib/components/pagenumbers/PageNumbers.component.svelte";
+    import type { BusinessCardInterface } from "$lib/models/index.js";
+    import { PageStore } from "$lib/stores/Page.Store";
+
     let searchTerm = '';
     let filterLinkedin = false;
     let filterImage = false;
-    let page = 1;
+    let page: number = 1;
+    let maxPage: number = 1;
+    let pages: number[] = [1];
+
+    $: {
+      page = $PageStore.page;
+      maxPage = $PageStore.maxPage;
+      pages = $PageStore.pages;
+    }
     const pageSize = 20;
+
+    let filteredBusinesses: BusinessCardInterface[] = [];
 
   $: sortedBusinesses = [...data.Businesses].sort((a, b) => {
     if (a.image === null) return 1;
@@ -16,40 +30,39 @@
     return a.image.localeCompare(b.image);
   });
 
-    $: filteredBusinesses = sortedBusinesses.filter(business => 
-        business.name.toLowerCase().includes(searchTerm.toLowerCase()) 
-        && (!filterLinkedin || business.linkedin !== null)
-        && (!filterImage || business.image !== null)
-    );
+  $: filteredBusinesses = sortedBusinesses.filter(business => 
+      business.name.toLowerCase().includes(searchTerm.toLowerCase()) 
+      && (!filterLinkedin || business.linkedin !== null)
+      && (!filterImage || business.image !== null)
+  );
 
-    $: maxPage = Math.ceil(filteredBusinesses.length / pageSize);
+  $: if (maxPage === 0){
+    PageStore.update(state => ({ ...state, page: 1 }));
+    PageStore.update(state => ({ ...state, pages: [1] }));
+  }
 
-    $: if (page > maxPage && maxPage > 0) page = maxPage;
+  $: if (page > maxPage && maxPage > 0){
+    PageStore.update(state => ({ ...state, page: maxPage }));
+    PageStore.update(state => ({ ...state, pages: Array.from(Array(state.maxPage).keys()).map(i => i + 1) }));
+  }
 
-    $: paginatedBusinesses = filteredBusinesses.slice((page - 1) * pageSize, (page) * pageSize);
+let paginatedBusinesses = filteredBusinesses.slice((page - 1) * pageSize, (page) * pageSize);
 
-    $: pages = Array.from({length: maxPage + 1}, (_, i) => i + 1);
+  $: {
+    paginatedBusinesses = filteredBusinesses.slice((page - 1) * pageSize, (page) * pageSize);
+  
+  const newMaxPage = Math.ceil(filteredBusinesses.length / pageSize);
+  if (newMaxPage !== maxPage) {
+    maxPage = newMaxPage;
+    PageStore.update(state => ({ ...state, maxPage }));
+  }
 
-    function goToPage(pageNumber: number) {
-        page = pageNumber;
-    }
-
-    let showInput: number | null = null;
-    let inputPageNumber = '';
-
-    function goToInputPageNumber() {
-        const pageNumber = parseInt(inputPageNumber);
-        if (!isNaN(pageNumber) && pageNumber >= 0 && pageNumber <= maxPage) {
-            page = pageNumber;
-        }
-        showInput = null;
-    }
-
-    function handleKeyPress(event: { key: string; }) {
-        if (event.key === 'Enter') {
-            goToInputPageNumber();
-        }
-    }
+  const newPages = Array.from({length: newMaxPage}, (_, i) => i + 1);
+  if (newPages !== pages) {
+    pages = newPages;
+    PageStore.update(state => ({ ...state, pages }));
+  }
+}
 
 </script>
 
@@ -66,44 +79,10 @@
   </div>
 
   <a href="/secret/stash" class="secret-link">Secrets Stash</a>
-  
-  <div class="PageNumbers">
-    {#each pages as pageNumber (pageNumber)}
-      {#if pageNumber != page && (pageNumber === 1 || pageNumber === maxPage || (pageNumber >= page - 2 && pageNumber <= page + 2 && pageNumber <= maxPage))}
-        <button on:click={() => goToPage(pageNumber)}>{pageNumber}</button>
-      {:else if pageNumber === page }
-        <button class="current-page" on:click={() => goToPage(pageNumber)}>{pageNumber}</button>
-      {:else if (pageNumber === page - 3 || pageNumber === page + 3 && pageNumber <= maxPage)}
-        {#if showInput === pageNumber}
-            <input class="GoTo" type="number" bind:value={inputPageNumber} on:blur={goToInputPageNumber} on:keydown={handleKeyPress} />
-        {:else}
-          <button on:click={() => {showInput = pageNumber;}} on:keydown={(event) => {if (event.key === 'Enter') {showInput = pageNumber;}}} style="cursor:pointer;">...</button>
-        {/if}
-      {/if}
-    {/each}
-  </div>
 
+  <PageNumbers />
   <BusinessCardsList businesscards={paginatedBusinesses} />
-
-  <div class="PageNumbers">
-    {#each pages as pageNumber (pageNumber)}
-      {#if pageNumber <= maxPage}
-        {#if pageNumber != page && (pageNumber === 1 || pageNumber === maxPage || (pageNumber >= page - 2 && pageNumber <= page + 2))}
-          <button on:click={() => goToPage(pageNumber)}>{pageNumber}</button>
-        {:else if pageNumber === page }
-          <button class="current-page" on:click={() => goToPage(pageNumber)}>{pageNumber}</button>
-        {:else if (pageNumber === page - 3 || pageNumber === page + 3)}
-          {#if showInput === pageNumber}
-              <input class="GoTo" type="number" bind:value={inputPageNumber} on:blur={goToInputPageNumber} on:keydown={handleKeyPress} />
-          {:else}
-            <button on:click={() => {showInput = pageNumber;}} on:keydown={(event) => {if (event.key === 'Enter') {showInput = pageNumber;}}} style="cursor:pointer;">...</button>
-          {/if}
-        {/if}
-      {/if}
-    {/each}
-  </div>
-
-
+  <PageNumbers />
 
   <div class="contactbar">
     <address> <a href="mailto:timemctigue@gmail.com">E-Mail</a></address>
@@ -134,24 +113,6 @@
       display: flex;
       gap: 5px;
       justify-content: center;
-  }
-
-  .PageNumbers button {
-    padding: 5px;
-    border: none;
-    background-color: transparent;
-    text-decoration: underline;
-    cursor: pointer;
-  }
-
-  .PageNumbers button:hover {
-      color: #0056b3;
-  }
-
-  .PageNumbers button.current-page {
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 1.2em;
   }
 
   .GoToPage {
@@ -206,10 +167,6 @@
       color: #c5b358; /* Softer gold text */
     }
 
-    .PageNumbers button {
-      color: #c5b358;
-    }
-
     address a {
       color: #757340;
     }
@@ -227,10 +184,6 @@
     background: #d6e8d4; /* Less pastel, more subdued green background */
     color: #757340; /* Darker gold text for better readability */
   }
-
-  .PageNumbers button {
-    color: #757340;
-    }
 
   address a {
     color: #757340;
