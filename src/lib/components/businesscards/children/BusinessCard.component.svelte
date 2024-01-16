@@ -300,7 +300,7 @@
 }
 
 /* Show the first and second link on small screens and up */
-@media (min-width: 200px) {
+@media (min-width: 100px) {
   .link-0,
   .link-1 {
     display: inline-block;
