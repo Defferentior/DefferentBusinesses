@@ -153,7 +153,7 @@ let paginatedBusinesses = filteredBusinesses.slice((page - 1) * pageSize, (page)
   .secret-link {
     position: fixed;
     right: 10px;
-    top: 30%;
+    top: 95%;
     font-size: 12px;
     opacity: 0;
   }
