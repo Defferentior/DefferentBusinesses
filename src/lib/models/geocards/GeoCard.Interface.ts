@@ -3,19 +3,14 @@ export interface BusinessCardInterface {
     name: string;
     url: string | null;
     image: string | null;
-    similarweb: string | null;
-    builtwith: string | null;
-    linkedin: string | null;
-    dunandbradsheet: string | null;
-    craft: string | null;
-    wikipedia: string | null;
-    /*
-    wikipedia: string;
-    wappalyzer: string;
+    latitude: number | null;
+    longitude: number | null;
+    /*wappalyzer: string;
     crunchbase: string;
     g2: string;
     trustpilot: string;
     yellowpages: string;
+    wikipedia: string;
     yelp: string;
     appstore: string;
     googleplay: string;*/

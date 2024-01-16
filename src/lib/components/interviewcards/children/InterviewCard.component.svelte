@@ -1,79 +1,53 @@
 <script lang="ts"> 
 
-    import { type BusinessCardInterface } from "$lib/models";
-    import { onMount } from 'svelte';
+    import { type InterviewCardInterface } from "$lib/models";
     import path1 from '$lib/images/path1.svg';
 
     let replacementImage = path1;
 
-    export let businesscard : BusinessCardInterface = {
+    export let interviewcard : InterviewCardInterface = {
         id: '0',
         name: '',
         url: null,
         image: null,
-        similarweb: '',
-        builtwith: '',
-        linkedin: '',
-        dunandbradsheet: '',
-        craft: '',
-        wikipedia: '',
-        /*
-        owler: '',
-        wappalyzer: '',
-        crunchbase: '',
-        g2: '',
-        trustpilot: '',
-        yellowpages: '',
-        yelp: '',
-        appstore: '',
-        googleplay: ''*/
+        interview: null
     };
-
-    let links = [
-      { name: 'Website', url: businesscard.url || undefined },
-      { name: 'LinkedIn', url: businesscard.linkedin },
-      { name: 'SimilarWeb', url: businesscard.similarweb },
-      { name: 'BuiltWith', url: businesscard.builtwith },
-      { name: 'Craft.co', url: businesscard.craft},
-      { name: 'Wikipedia', url: businesscard.wikipedia},
-      { name: 'Dun & Bradstreet', url: businesscard.dunandbradsheet },
-  ];
-    links = links.filter(link => link.url);
 
     let mapContainer: any;
 
 </script>
 
-<div class="businesscard">
-    <div class="businesscard-header">
+<div class="interviewcard">
+    <div class="interviewcard-header">
       <h2>
-        <a class="businesscard-head-link" style="text-decoration: none;" href={businesscard.url}>
-          {businesscard.name}
+        <a class="interviewcard-head-link" style="text-decoration: none;" href={interviewcard.url}>
+          {interviewcard.name}
         </a>
       </h2>
     </div>
-    <div class="businesscard-links">
-      {#each links as link, i (link.name)}
-        <a class="businesscard-link link-{i}" href={link.url}>{link.name}</a>
-      {/each}
+    <div class="interviewcard-content">
+        <div class="card-content">
+            <p>{interviewcard.interview}</p>
+        </div>
+
     </div>
-    {#if !businesscard.image}
-    <img src={replacementImage} alt={businesscard.name} class={["businesscard-image","imgshow"].join(' ')} />
+    {#if !interviewcard.image}
+    <img src={replacementImage} alt={interviewcard.name} class={["interviewcard-image","imgshow"].join(' ')} />
     {/if}
-    {#if businesscard.image}
-    <img src={businesscard.image} alt={businesscard.name} class={["businesscard-image","imgshow"].join(' ')} />
+    {#if interviewcard.image}
+    <img src={interviewcard.image} alt={interviewcard.name} class={["interviewcard-image","imgshow"].join(' ')} />
     {/if}
 </div>
 
 <style>
 
-.businesscard {
+.interviewcard {
   display: grid; /* Enable Grid */
   flex-grow: 1;
   box-sizing: border-box;
   grid-template-areas:"image header header header"
-                      "image tags tags tags"
-                      "image links links links";
+                      "image content content content"
+                      "image content content content";
   grid-template-columns: min(20%,200px) 1fr auto;
   grid-template-rows: auto auto;
   margin: .25rem;
@@ -87,7 +61,7 @@
   border-radius: .25em;
 }
 
-.businesscard-header {
+.interviewcard-header {
   display: flex;
   flex-direction: column;
   font-size: 1.2em;
@@ -98,7 +72,7 @@
   position: relative
 }
 
-.businesscard-link {
+.interviewcard-link {
   border-radius: .25rem;
   display: inline-block;
   font-size: .625rem;
@@ -109,17 +83,17 @@
   padding: 0 .375rem;
 }
 
-.businesscard-head-link {
+.interviewcard-head-link {
   border-radius: .25rem;
 }
 
-.businesscard-links {
+.interviewcard-content {
   display: flex;
-  grid-area: links;
+  grid-area: content;
   
 }
 
-.businesscard-image {
+.interviewcard-image {
   transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
   width: 85%; /* Adjust width as needed */
   height: auto;
@@ -133,7 +107,7 @@
   object-fit: cover; /* Ensures the image covers the padding area */
 }
 
-.businesscard-image:hover {
+.interviewcard-image:hover {
   transform: scale(1.05); /* Slightly enlarges the image */
   opacity: 0.9; /* Slightly reduces opacity */
 }
@@ -150,41 +124,41 @@
     --link-hover-color: #4e4e36; /* Darker text color on hover */
   }
 
-  .businesscard {
+  .interviewcard {
     background-color: #dce5be; /* Adjusted light green with more depth */
     color: #757340; /* Darker gold text for better contrast */
     box-shadow: 0 0 5px rgba(117, 115, 64, 0.5); /* Adjusted gold shadow for better definition */
   }
 
-  .businesscard-image {
+  .interviewcard-image {
     background: var(--image-background); /* Uses the darker background variable */
     /* ... other styles ... */
   }
 
-  .businesscard-header {
+  .interviewcard-header {
     color: #9c9a50; /* Less pastel, more pronounced gold */
     transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
   }
 
-  .businesscard-head-link {
+  .interviewcard-head-link {
     color: #9c9a50; /* Paler gold links */
     transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
   }
 
-  .businesscard-head-link:hover,
-  .businesscard-head-link:focus {
+  .interviewcard-head-link:hover,
+  .interviewcard-head-link:focus {
     background-color: var(--link-hover-background);
     color: var(--link-hover-color);
     text-decoration: none; /* Optional: remove if you want underline on hover */
   }
 
-  .businesscard-link {
+  .interviewcard-link {
     color: #9c9a50; /* Less pastel, more pronounced gold */
     transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
   }
 
-  .businesscard-link:hover,
-  .businesscard-link:focus {
+  .interviewcard-link:hover,
+  .interviewcard-link:focus {
     background-color: var(--link-hover-background);
     color: var(--link-hover-color);
     text-decoration: none; /* Optional: remove if you want underline on hover */
@@ -193,36 +167,36 @@
 
 @media (prefers-color-scheme: dark) {
 
-  .businesscard {
+  .interviewcard {
     background-color: #3d5a4c; /* Soft dark green background */
     color: #c5b358; /* Soft gold text */
     box-shadow: 0 0 5px rgba(197, 179, 88, 0.5); /* Softer gold shadow */
   }
 
-  .businesscard-header {
+  .interviewcard-header {
     color: #c9b037; /* Paler gold links */
     transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
   }
 
-  .businesscard-head-link {
+  .interviewcard-head-link {
     color: #c9b037; /* Paler gold links */
     transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
   }
 
-  .businesscard-head-link:hover,
-  .businesscard-head-link:focus {
+  .interviewcard-head-link:hover,
+  .interviewcard-head-link:focus {
     background-color: var(--link-hover-background);
     color: var(--link-hover-color);
     text-decoration: none; /* Optional: remove if you want underline on hover */
   }
 
-  .businesscard-link {
+  .interviewcard-link {
     color: #c9b037; /* Paler gold links */
     transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
   }
 
-  .businesscard-link:hover,
-  .businesscard-link:focus {
+  .interviewcard-link:hover,
+  .interviewcard-link:focus {
     background-color: var(--link-hover-background);
     color: var(--link-hover-color);
     text-decoration: none; /* Optional: remove if you want underline on hover */
@@ -230,7 +204,7 @@
 }
 
 @media only screen and (max-width: 360px) {
-  .businesscard {
+  .interviewcard {
     grid-template-areas:"header header header"
     "tags tags tags"
     "links links links";
@@ -242,7 +216,7 @@
 }
 
 @media only screen and (max-width: 300px) {
-  .businesscard-link {
+  .interviewcard-link {
     border-radius: .25rem;
     display: inline-block;
     font-size: .55rem;
@@ -252,7 +226,7 @@
     margin-top: auto;
     padding: 0.25rem;
   }
-  .businesscard-header {
+  .interviewcard-header {
 
     font-size: 1em;
     font-weight: 600;
@@ -272,6 +246,11 @@
   }
 }
 
+@media only screen and (max-width: 410px) {
+  .linkinshow {
+      display: none;
+  }
+}
 
 @media only screen and (max-width: 700px) {
   .businesscard-image {
@@ -293,49 +272,6 @@
   .businesscard-image {
       width: 75%;
   }
-
-/* Hide all links by default */
-.businesscard-link {
-  display: none;
-}
-
-/* Show the first and second link on small screens and up */
-@media (min-width: 200px) {
-  .link-0,
-  .link-1 {
-    display: inline-block;
-  }
-}
-
-/* Show the third and fourth link on slightly larger screens and up */
-@media (min-width: 250px) {
-  .link-2,
-  .link-3 {
-    display: inline-block;
-  }
-}
-
-/* Show the fifth link on medium screens and up */
-@media (min-width: 350px) {
-  .link-4{
-    display: inline-block;
-  }
-}
-
-/* Show the sixth link on large screens and up */
-@media (min-width: 450px) {
-  .link-5 {
-    display: inline-block;
-  }
-}
-
-/* Show the seventh link on large screens and up */
-@media (min-width: 500px) {
-  .link-6 {
-    display: inline-block;
-  }
-}
-
 }
 
 </style>

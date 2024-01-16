@@ -1,11 +1,11 @@
 <script lang="ts">
   export let data;
 
-  import BusinessCardsList from "$lib/components/businesscards/BusinessCardsList.component.svelte";
+  import InterviewCardsList from "$lib/components/interviewcards/InterviewCardsList.component.svelte";
   import defferentiator from '$lib/images/defferentiator-circular-logo-25.png'
 
   import PageNumbers from "$lib/components/pagenumbers/PageNumbers.component.svelte";
-  import type { BusinessCardInterface } from "$lib/models/index.js";
+  import type { InterviewCardInterface } from "$lib/models/index.js";
   import { PageStore } from "$lib/stores/Page.Store";
 
   let searchTerm = '';
@@ -22,18 +22,18 @@
   }
   const pageSize = 20;
 
-  let filteredBusinesses: BusinessCardInterface[] = [];
+  let filteredInterviews: InterviewCardInterface[] = [];
 
-  $: sortedBusinesses = [...data.Businesses].sort((a, b) => {
+  $: sortedInterviews = [...data.Businesses].sort((a, b) => {
     if (a.image === null) return 1;
     if (b.image === null) return -1;
     return a.image.localeCompare(b.image);
   });
 
-$: filteredBusinesses = sortedBusinesses.filter(business => 
-    business.name.toLowerCase().includes(searchTerm.toLowerCase()) 
-    && (!filterLinkedin || business.linkedin !== null)
-    && (!filterImage || business.image !== null)
+$: filteredInterviews = sortedInterviews.filter(interview => 
+    interview.name.toLowerCase().includes(searchTerm.toLowerCase()) 
+    && (!filterImage || interview.image !== null)
+    && ( interview.interview !== null )
 );
 
 $: if (maxPage === 0){
@@ -46,12 +46,12 @@ $: if (page > maxPage && maxPage > 0){
   PageStore.update(state => ({ ...state, pages: Array.from(Array(state.maxPage).keys()).map(i => i + 1) }));
 }
 
-let paginatedBusinesses = filteredBusinesses.slice((page - 1) * pageSize, (page) * pageSize);
+let paginatedInterviews = filteredInterviews.slice((page - 1) * pageSize, (page) * pageSize);
 
 $: {
-  paginatedBusinesses = filteredBusinesses.slice((page - 1) * pageSize, (page) * pageSize);
+  paginatedInterviews = filteredInterviews.slice((page - 1) * pageSize, (page) * pageSize);
 
-const newMaxPage = Math.ceil(filteredBusinesses.length / pageSize);
+const newMaxPage = Math.ceil(filteredInterviews.length / pageSize);
 if (newMaxPage !== maxPage) {
   maxPage = newMaxPage;
   PageStore.update(state => ({ ...state, maxPage }));
@@ -81,7 +81,7 @@ if (newPages !== pages) {
 <a href="/secret/stash" class="secret-link">Secrets Stash</a>
 
 <PageNumbers />
-<BusinessCardsList businesscards={paginatedBusinesses} />
+<InterviewCardsList interviewcards={paginatedInterviews} />
 <PageNumbers />
 
 <div class="contactbar">
