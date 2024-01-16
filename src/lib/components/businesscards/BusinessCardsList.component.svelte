@@ -10,8 +10,8 @@
 </script>
 
 <div class="businesscards">
-    {#each businesscards as businesscard}
-        <BusinessCard businesscard={businesscard} />
+    {#each businesscards as businesscard (businesscard.id)}
+        <BusinessCard {businesscard} />
     {/each}
 </div>
 

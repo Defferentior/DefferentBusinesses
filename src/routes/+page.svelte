@@ -24,7 +24,9 @@
 
     let filteredBusinesses: BusinessCardInterface[] = [];
 
-    let sortedBusinesses = [...data.Businesses].sort((a, b) => {
+    let sortedBusinesses: BusinessCardInterface[] = [];
+
+    $: sortedBusinesses = [...data.Businesses].sort((a, b) => {
       if (a.image === null) return 1;
       if (b.image === null) return -1;
       return a.image.localeCompare(b.image);

@@ -17,16 +17,7 @@
         dunandbradsheet: '',
         craft: '',
         wikipedia: '',
-        /*
-        owler: '',
-        wappalyzer: '',
-        crunchbase: '',
-        g2: '',
-        trustpilot: '',
-        yellowpages: '',
-        yelp: '',
-        appstore: '',
-        googleplay: ''*/
+
     };
 
     let links = [
@@ -37,10 +28,7 @@
       { name: 'Craft.co', url: businesscard.craft},
       { name: 'Wikipedia', url: businesscard.wikipedia},
       { name: 'Dun & Bradstreet', url: businesscard.dunandbradsheet },
-  ];
-    links = links.filter(link => link.url);
-
-    let mapContainer: any;
+  ].filter(link => link.url);
 
 </script>
 
