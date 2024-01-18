@@ -7,6 +7,11 @@
     import PageNumbers from "$lib/components/pagenumbers/PageNumbers.component.svelte";
     import type { BusinessCardInterface } from "$lib/models/index.js";
     import { PageStore } from "$lib/stores/Page.Store";
+    import { MapLibre } from 'svelte-maplibre';
+    //import DefaultMarker from "$lib/components/mapcomponents/DefaultMarker.svelte";
+    import Marker from "$lib/components/mapcomponents/Marker.svelte";
+    import { mapClasses } from './styles';
+    import Popup from "$lib/components/mapcomponents/Popup.svelte"; 
 
     let searchTerm = '';
     let filterLinkedin = false;
@@ -14,6 +19,7 @@
     let page: number = 1;
     let maxPage: number = 1;
     let pages: number[] = [1];
+    let markers: { lngLat: [number, number]; label: string; name: string }[] = [];
 
     $: {
       page = $PageStore.page;
@@ -52,10 +58,11 @@
     PageStore.update(state => ({ ...state, pages: Array.from(Array(state.maxPage).keys()).map(i => i + 1) }));
   }
 
-let paginatedBusinesses = filteredBusinesses.slice((page - 1) * pageSize, (page) * pageSize);
+  let paginatedBusinesses = filteredBusinesses.slice((page - 1) * pageSize, (page) * pageSize);
 
   $: {
     paginatedBusinesses = filteredBusinesses.slice((page - 1) * pageSize, (page) * pageSize);
+    
   
   const newMaxPage = Math.ceil(filteredBusinesses.length / pageSize);
   if (newMaxPage !== maxPage) {
@@ -68,26 +75,66 @@ let paginatedBusinesses = filteredBusinesses.slice((page - 1) * pageSize, (page)
     pages = newPages;
     PageStore.update(state => ({ ...state, pages }));
   }
+
+    markers = filteredBusinesses
+    .filter(business => business.longitude && business.latitude)
+    .map(business => {
+      return {
+        lngLat: [business.latitude as number, business.longitude as number],
+        label: business.name,
+        name: business.name,
+      }
+    })
+
+  
 }
 
 </script>
 
+
 <title>{'Defferent Businesses'}</title>
+
 <body id="root">
-    <div class="Titlelist">
+  <div class="Titlelist">
     <h1>Businesses</h1> <img src={defferentiator} alt={"logo"} class={["logo"].join(' ')} />
-    </div> 
-    <h3>Only Include Businesses With:  </h3>
-    <div>
-      <input name="linkedincheckbox" type="checkbox" bind:checked={filterLinkedin} /> LinkedIn
-      <input name="imagecheckbox" type="checkbox" bind:checked={filterImage} /> Picture |
+  </div> 
+
+  <MapLibre
+  center={[-118.25,34.15]}
+    zoom={7.5}
+    class="map"
+    standardControls
+    style="https://basemaps.cartocdn.com/gl/positron-gl-style/style.json"
+  >
+  {#each markers as { lngLat, label, name } (label)}
+    <Marker
+      {lngLat}
+    >
+      <span>
+        {label.substring(0,4)}
+      </span>
+
+      <Popup openOn="click" offset={[0, -10]}>
+        <div class="text-lg font-bold">{name}</div>
+      </Popup>
+    </Marker>
+  {/each}
+  </MapLibre>
+
+  <h3>Only Include Businesses With:  </h3>
+
+  <div>
+    <input name="linkedincheckbox" type="checkbox" bind:checked={filterLinkedin} /> LinkedIn
+    <input name="imagecheckbox" type="checkbox" bind:checked={filterImage} /> Picture |
     <input name="namesearch" type="text" bind:value={searchTerm} placeholder="Search..." /> Name
   </div>
+
+
 
   <a href="/secret/stash" class="secret-link">Secrets Stash</a>
 
   <PageNumbers />
-  <BusinessCardsList businesscards={paginatedBusinesses} />
+    <BusinessCardsList businesscards={paginatedBusinesses} />
   <PageNumbers />
 
   <div class="contactbar">
@@ -95,6 +142,7 @@ let paginatedBusinesses = filteredBusinesses.slice((page - 1) * pageSize, (page)
     <address> <a href="https://www.linkedin.com/in/timothy-mctigue-30507429a/">Linkedin</a></address>
   </div>
 </body>
+
 
 <style>
 
@@ -198,5 +246,8 @@ let paginatedBusinesses = filteredBusinesses.slice((page - 1) * pageSize, (page)
 
 }
 
+:global(.map) {
+    height: 400px;
+  }
 
 </style>

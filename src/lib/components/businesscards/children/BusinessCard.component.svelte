@@ -17,6 +17,8 @@
         dunandbradsheet: '',
         craft: '',
         wikipedia: '',
+        longitude: 0,
+        latitude: 0,
 
     };
 
@@ -205,7 +207,7 @@
   }
 
   .businesscard-link {
-    color: #c9b037; /* Paler gold links */
+    color: #9c892c; /* Paler gold links */
     transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
   }
 

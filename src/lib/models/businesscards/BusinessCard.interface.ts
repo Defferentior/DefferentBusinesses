@@ -9,6 +9,8 @@ export interface BusinessCardInterface {
     dunandbradsheet: string | null;
     craft: string | null;
     wikipedia: string | null;
+    longitude: number | null;
+    latitude: number | null;
     /*
     wikipedia: string;
     wappalyzer: string;
