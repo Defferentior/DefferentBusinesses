@@ -12,6 +12,7 @@
     import Marker from "$lib/components/mapcomponents/Marker.svelte";
     import { mapClasses } from './styles';
     import Popup from "$lib/components/mapcomponents/Popup.svelte"; 
+	import BusinessCard from "$lib/components/businesscards/children/BusinessCard.component.svelte";
 
     let searchTerm = '';
     let filterLinkedin = false;
@@ -26,11 +27,12 @@
       maxPage = $PageStore.maxPage;
       pages = $PageStore.pages;
     }
+
     const pageSize = 20;
 
     let filteredBusinesses: BusinessCardInterface[] = [];
-
     let sortedBusinesses: BusinessCardInterface[] = [];
+    let paginatedBusinesses: BusinessCardInterface[] = [];
 
     $: sortedBusinesses = [...data.Businesses].sort((a, b) => {
       if (a.image === null) return 1;
@@ -52,29 +54,30 @@
     PageStore.update(state => ({ ...state, page: 1 }));
     PageStore.update(state => ({ ...state, pages: [1] }));
   }
+  
+  $: {
+    const newMaxPage = Math.ceil(filteredBusinesses.length / pageSize);
+    const newPages = Array.from({length: newMaxPage}, (_, i) => i + 1);
 
-  $: if (page > maxPage && maxPage > 0){
-    PageStore.update(state => ({ ...state, page: maxPage }));
-    PageStore.update(state => ({ ...state, pages: Array.from(Array(state.maxPage).keys()).map(i => i + 1) }));
+    if (newMaxPage !== maxPage) {
+      maxPage = newMaxPage;
+      PageStore.update(state => ({ ...state, maxPage }));
+    }
+
+    if (newPages.toString() !== pages.toString()) {
+      pages = newPages;
+      PageStore.update(state => ({ ...state, pages }));
+    }
+
+    if (page > maxPage && maxPage > 0) {
+      page = maxPage;
+      PageStore.update(state => ({ ...state, page }));
+    }
   }
-
-  let paginatedBusinesses = filteredBusinesses.slice((page - 1) * pageSize, (page) * pageSize);
 
   $: {
-    paginatedBusinesses = filteredBusinesses.slice((page - 1) * pageSize, (page) * pageSize);
-    
-  
-  const newMaxPage = Math.ceil(filteredBusinesses.length / pageSize);
-  if (newMaxPage !== maxPage) {
-    maxPage = newMaxPage;
-    PageStore.update(state => ({ ...state, maxPage }));
-  }
 
-  const newPages = Array.from({length: newMaxPage}, (_, i) => i + 1);
-  if (newPages !== pages) {
-    pages = newPages;
-    PageStore.update(state => ({ ...state, pages }));
-  }
+    paginatedBusinesses = filteredBusinesses.slice((page - 1) * pageSize, (page) * pageSize);
 
     markers = filteredBusinesses
     .filter(business => business.longitude && business.latitude)
@@ -85,9 +88,7 @@
         name: business.name,
       }
     })
-
-  
-}
+  }
 
 </script>
 
