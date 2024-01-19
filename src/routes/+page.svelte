@@ -79,7 +79,7 @@
 
     paginatedBusinesses = filteredBusinesses.slice((page - 1) * pageSize, (page) * pageSize);
 
-    markers = filteredBusinesses
+    markers = filteredBusinesses.reverse()
     .filter(business => business.longitude && business.latitude)
     .map(business => {
       return {
