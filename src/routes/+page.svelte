@@ -107,9 +107,10 @@
     standardControls
     style="https://basemaps.cartocdn.com/gl/positron-gl-style/style.json"
   >
-  {#each markers as { lngLat, label, name } (label)}
+  {#each markers as { lngLat, label, name }, i (label)}
     <Marker
       {lngLat}
+      zIndex={markers.length - 1 - i}
     >
       <span>
         {label.substring(0,4)}
