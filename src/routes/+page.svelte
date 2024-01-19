@@ -107,7 +107,7 @@
     standardControls
     style="https://basemaps.cartocdn.com/gl/positron-gl-style/style.json"
   >
-  {#each markers.reverse() as { lngLat, label, name } (label)}
+  {#each markers as { lngLat, label, name } (label)}
     <Marker
       {lngLat}
     >
