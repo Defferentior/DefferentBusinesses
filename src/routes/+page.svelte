@@ -83,7 +83,7 @@
     .filter(business => business.longitude && business.latitude)
     .map(business => {
       return {
-        lngLat: [business.latitude as number, business.longitude as number],
+        lngLat: [business.longitude as number, business.latitude as number],
         label: business.name,
         name: business.name,
       }
