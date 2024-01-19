@@ -140,7 +140,6 @@
 
   <div class="contactbar">
     <address> <a href="mailto:timemctigue@gmail.com">E-Mail</a></address>
-    <address> <a href="https://www.linkedin.com/in/timothy-mctigue-30507429a/">Linkedin</a></address>
   </div>
 </body>
 
