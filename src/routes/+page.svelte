@@ -79,7 +79,7 @@
 
     paginatedBusinesses = filteredBusinesses.slice((page - 1) * pageSize, (page) * pageSize);
 
-    markers = filteredBusinesses.reverse()
+    markers = filteredBusinesses
     .filter(business => business.longitude && business.latitude)
     .map(business => {
       return {
@@ -107,7 +107,7 @@
     standardControls
     style="https://basemaps.cartocdn.com/gl/positron-gl-style/style.json"
   >
-  {#each markers as { lngLat, label, name } (label)}
+  {#each markers.reverse() as { lngLat, label, name } (label)}
     <Marker
       {lngLat}
     >
