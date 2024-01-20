@@ -2,6 +2,7 @@
 
     import { type AnswersCardInterface } from "$lib/models";
     import path1 from '$lib/images/path1.svg';
+    import SvelteMarkdown from 'svelte-markdown';
 
     let replacementImage = path1;
 
@@ -13,9 +14,14 @@
         answers: null
     };
 
+  let showFullText = false;
+  function toggleFullText() {
+    showFullText = !showFullText;
+  }
+
 </script>
 
-<div class="answerscard">
+<div class="answerscard" class:expanded={showFullText}>
     <div class="answerscard-header">
       <h2>
         <a class="answerscard-head-link" style="text-decoration: none;" href={answerscard.url}>
@@ -23,11 +29,17 @@
         </a>
       </h2>
     </div>
-    <div class="answerscard-content">
-        <div class="card-content">
-            <p>{answerscard.answers}</p>
-        </div>
-
+    {#if showFullText}
+    <div>
+     <SvelteMarkdown source={answerscard.answers} />
+    </div>
+    {:else}
+      <b>Questions Asked of</b>
+    {/if}
+    <button id="moreButton" on:click={toggleFullText}>
+      {showFullText ? 'Less' : 'More'}
+    </button>
+    <div>
     </div>
     {#if !answerscard.image}
     <img src={replacementImage} alt={answerscard.name} class={["answerscard-image","imgshow"].join(' ')} />
@@ -57,7 +69,20 @@
   position: relative;
   text-align: left;
   border-radius: .25em;
+  overflow: hidden;
 }
+
+.answerscard.expanded {
+    max-height: none;
+  }
+
+  #moreButton {
+    max-height: 2rem;
+    position: absolute;
+    top: 1rem;
+    right: 0%;
+    transform: translate(-50%, -50%);
+  }
 
 .answerscard-header {
   display: flex;
