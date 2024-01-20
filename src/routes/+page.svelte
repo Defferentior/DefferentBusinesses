@@ -1,4 +1,11 @@
 <script lang="ts">
+    /*
+    * Comments for the Future:
+    * This is the page that displays all of the businesses in the database.
+    * In order to get the Map to work, I had to use the svelte-maplibre package.
+    * The Marker and popup code were taken explicitly from https://github.com/dimfeld/svelte-maplibre/ as of 2024-19-01
+    * The Zindex shenanagins are to make sure that the markers are displayed in the correct order even when updated.
+    */
     export let data;
 
     import BusinessCardsList from "$lib/components/businesscards/BusinessCardsList.component.svelte";
@@ -10,13 +17,12 @@
     import { MapLibre } from 'svelte-maplibre';
     //import DefaultMarker from "$lib/components/mapcomponents/DefaultMarker.svelte";
     import Marker from "$lib/components/mapcomponents/Marker.svelte";
-    import { mapClasses } from './styles';
     import Popup from "$lib/components/mapcomponents/Popup.svelte"; 
-	import BusinessCard from "$lib/components/businesscards/children/BusinessCard.component.svelte";
 
     let searchTerm = '';
     let filterLinkedin = false;
     let filterImage = false;
+    let filterLocation = false;
     let page: number = 1;
     let maxPage: number = 1;
     let pages: number[] = [1];
@@ -48,6 +54,7 @@
       business.name.toLowerCase().includes(searchTerm.toLowerCase()) 
       && (!filterLinkedin || business.linkedin !== null)
       && (!filterImage || business.image !== null)
+      && (!filterLocation || (business.longitude !== null && business.latitude !== null))
   );
 
   $: if (maxPage === 0){
@@ -101,8 +108,8 @@
   </div> 
 
   <MapLibre
-  center={[-118.25,34.15]}
-    zoom={7.5}
+  center={[-118.15,34]}
+    zoom={7.25}
     class="map"
     standardControls
     style="https://basemaps.cartocdn.com/gl/positron-gl-style/style.json"
@@ -128,7 +135,10 @@
   <div>
     <input name="linkedincheckbox" type="checkbox" bind:checked={filterLinkedin} /> LinkedIn
     <input name="imagecheckbox" type="checkbox" bind:checked={filterImage} /> Picture |
-    <input name="namesearch" type="text" bind:value={searchTerm} placeholder="Search..." /> Name
+    <input name="locationcheckbox" type="checkbox" bind:checked={filterLocation} /> Location
+    <div>
+      <input name="namesearch" type="text" bind:value={searchTerm} placeholder="Search..." /> Name
+    </div>
   </div>
 
 

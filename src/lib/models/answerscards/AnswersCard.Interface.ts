@@ -1,9 +1,9 @@
-export interface InterviewCardInterface {
+export interface AnswersCardInterface {
     id: string;
     name: string;
     url: string | null;
     image: string | null;
-    interview: string | null;
+    answers: string | null;
     /*wappalyzer: string;
     crunchbase: string;
     g2: string;

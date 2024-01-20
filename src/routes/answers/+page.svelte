@@ -1,11 +1,11 @@
 <script lang="ts">
   export let data;
 
-  import InterviewCardsList from "$lib/components/interviewcards/InterviewCardsList.component.svelte";
+  import AnswersCardsList from "$lib/components/answerscards/AnswersCardsList.component.svelte";
   import defferentiator from '$lib/images/defferentiator-circular-logo-25.png'
 
   import PageNumbers from "$lib/components/pagenumbers/PageNumbers.component.svelte";
-  import type { InterviewCardInterface } from "$lib/models/index.js";
+  import type { AnswersCardInterface } from "$lib/models/index.js";
   import { PageStore } from "$lib/stores/Page.Store";
 
   let searchTerm = '';
@@ -22,18 +22,18 @@
   }
   const pageSize = 20;
 
-  let filteredInterviews: InterviewCardInterface[] = [];
+  let filteredAnswers: AnswersCardInterface[] = [];
 
-  $: sortedInterviews = [...data.Businesses].sort((a, b) => {
+  $: sortedAnswers = [...data.Businesses].sort((a, b) => {
     if (a.image === null) return 1;
     if (b.image === null) return -1;
     return a.image.localeCompare(b.image);
   });
 
-$: filteredInterviews = sortedInterviews.filter(interview => 
-    interview.name.toLowerCase().includes(searchTerm.toLowerCase()) 
-    && (!filterImage || interview.image !== null)
-    && ( interview.interview !== null )
+$: filteredAnswers = sortedAnswers.filter(answers => 
+answers.name.toLowerCase().includes(searchTerm.toLowerCase()) 
+    && (!filterImage || answers.image !== null)
+    && ( answers.answers !== null )
 );
 
 $: if (maxPage === 0){
@@ -46,12 +46,12 @@ $: if (page > maxPage && maxPage > 0){
   PageStore.update(state => ({ ...state, pages: Array.from(Array(state.maxPage).keys()).map(i => i + 1) }));
 }
 
-let paginatedInterviews = filteredInterviews.slice((page - 1) * pageSize, (page) * pageSize);
+let paginatedAnswers = filteredAnswers.slice((page - 1) * pageSize, (page) * pageSize);
 
 $: {
-  paginatedInterviews = filteredInterviews.slice((page - 1) * pageSize, (page) * pageSize);
+  paginatedAnswers = filteredAnswers.slice((page - 1) * pageSize, (page) * pageSize);
 
-const newMaxPage = Math.ceil(filteredInterviews.length / pageSize);
+const newMaxPage = Math.ceil(filteredAnswers.length / pageSize);
 if (newMaxPage !== maxPage) {
   maxPage = newMaxPage;
   PageStore.update(state => ({ ...state, maxPage }));
@@ -81,7 +81,7 @@ if (newPages !== pages) {
 <a href="/secret/stash" class="secret-link">Secrets Stash</a>
 
 <PageNumbers />
-<InterviewCardsList interviewcards={paginatedInterviews} />
+  <AnswersCardsList answerscards={paginatedAnswers} />
 <PageNumbers />
 
 <div class="contactbar">

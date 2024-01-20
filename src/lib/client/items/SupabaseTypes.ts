@@ -11,13 +11,14 @@ export interface Database {
     Tables: {
       Businesses: {
         Row: {
+          address: string | null
+          answers: string | null
           builtwith: string | null
           craft: string | null
           description: string | null
           dunandbradsheet: string | null
           id: string
           image: string | null
-          interview: string | null
           latitude: number | null
           linkedin: string | null
           longitude: number | null
@@ -28,13 +29,14 @@ export interface Database {
           wikipedia: string | null
         }
         Insert: {
+          address?: string | null
+          answers?: string | null
           builtwith?: string | null
           craft?: string | null
           description?: string | null
           dunandbradsheet?: string | null
           id?: string
           image?: string | null
-          interview?: string | null
           latitude?: number | null
           linkedin?: string | null
           longitude?: number | null
@@ -45,13 +47,14 @@ export interface Database {
           wikipedia?: string | null
         }
         Update: {
+          address?: string | null
+          answers?: string | null
           builtwith?: string | null
           craft?: string | null
           description?: string | null
           dunandbradsheet?: string | null
           id?: string
           image?: string | null
-          interview?: string | null
           latitude?: number | null
           linkedin?: string | null
           longitude?: number | null

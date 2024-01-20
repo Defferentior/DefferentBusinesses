@@ -1,4 +1,8 @@
 <script lang="ts">
+    /**
+     * Comments for the Future:
+     * Taken from https://github.com/dimfeld/svelte-maplibre/ as of 2024-19-01
+     */
     import type { Feature } from 'geojson';
     import maplibregl, {
       type MapMouseEvent,
@@ -38,6 +42,9 @@
   
     /** Where to show the popup. */
     export let lngLat: maplibregl.LngLatLike | undefined = undefined;
+
+    /** TODO: The z-index of the marker. This can also be set via CSS classes using the `class` prop 
+    export let zIndex: number | undefined = undefined; */
   
     /** If set and the slot is omitted, use this string as HTML to pass into the popup. */
     export let html: string | undefined = undefined;

@@ -1,47 +1,45 @@
 <script lang="ts"> 
 
-    import { type InterviewCardInterface } from "$lib/models";
+    import { type AnswersCardInterface } from "$lib/models";
     import path1 from '$lib/images/path1.svg';
 
     let replacementImage = path1;
 
-    export let interviewcard : InterviewCardInterface = {
+    export let answerscard : AnswersCardInterface = {
         id: '0',
         name: '',
         url: null,
         image: null,
-        interview: null
+        answers: null
     };
-
-    let mapContainer: any;
 
 </script>
 
-<div class="interviewcard">
-    <div class="interviewcard-header">
+<div class="answerscard">
+    <div class="answerscard-header">
       <h2>
-        <a class="interviewcard-head-link" style="text-decoration: none;" href={interviewcard.url}>
-          {interviewcard.name}
+        <a class="answerscard-head-link" style="text-decoration: none;" href={answerscard.url}>
+          {answerscard.name}
         </a>
       </h2>
     </div>
-    <div class="interviewcard-content">
+    <div class="answerscard-content">
         <div class="card-content">
-            <p>{interviewcard.interview}</p>
+            <p>{answerscard.answers}</p>
         </div>
 
     </div>
-    {#if !interviewcard.image}
-    <img src={replacementImage} alt={interviewcard.name} class={["interviewcard-image","imgshow"].join(' ')} />
+    {#if !answerscard.image}
+    <img src={replacementImage} alt={answerscard.name} class={["answerscard-image","imgshow"].join(' ')} />
     {/if}
-    {#if interviewcard.image}
-    <img src={interviewcard.image} alt={interviewcard.name} class={["interviewcard-image","imgshow"].join(' ')} />
+    {#if answerscard.image}
+    <img src={answerscard.image} alt={answerscard.name} class={["answerscard-image","imgshow"].join(' ')} />
     {/if}
 </div>
 
 <style>
 
-.interviewcard {
+.answerscard {
   display: grid; /* Enable Grid */
   flex-grow: 1;
   box-sizing: border-box;
@@ -61,7 +59,7 @@
   border-radius: .25em;
 }
 
-.interviewcard-header {
+.answerscard-header {
   display: flex;
   flex-direction: column;
   font-size: 1.2em;
@@ -72,7 +70,7 @@
   position: relative
 }
 
-.interviewcard-link {
+.answerscard-link {
   border-radius: .25rem;
   display: inline-block;
   font-size: .625rem;
@@ -83,17 +81,17 @@
   padding: 0 .375rem;
 }
 
-.interviewcard-head-link {
+.answerscard-head-link {
   border-radius: .25rem;
 }
 
-.interviewcard-content {
+.answerscard-content {
   display: flex;
   grid-area: content;
   
 }
 
-.interviewcard-image {
+.answerscard-image {
   transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
   width: 85%; /* Adjust width as needed */
   height: auto;
@@ -107,7 +105,7 @@
   object-fit: cover; /* Ensures the image covers the padding area */
 }
 
-.interviewcard-image:hover {
+.answerscard-image:hover {
   transform: scale(1.05); /* Slightly enlarges the image */
   opacity: 0.9; /* Slightly reduces opacity */
 }
@@ -124,41 +122,41 @@
     --link-hover-color: #4e4e36; /* Darker text color on hover */
   }
 
-  .interviewcard {
+  .answerscard {
     background-color: #dce5be; /* Adjusted light green with more depth */
     color: #757340; /* Darker gold text for better contrast */
     box-shadow: 0 0 5px rgba(117, 115, 64, 0.5); /* Adjusted gold shadow for better definition */
   }
 
-  .interviewcard-image {
+  .answerscard-image {
     background: var(--image-background); /* Uses the darker background variable */
     /* ... other styles ... */
   }
 
-  .interviewcard-header {
+  .answerscard-header {
     color: #9c9a50; /* Less pastel, more pronounced gold */
     transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
   }
 
-  .interviewcard-head-link {
+  .answerscard-head-link {
     color: #9c9a50; /* Paler gold links */
     transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
   }
 
-  .interviewcard-head-link:hover,
-  .interviewcard-head-link:focus {
+  .answerscard-head-link:hover,
+  .answerscard-head-link:focus {
     background-color: var(--link-hover-background);
     color: var(--link-hover-color);
     text-decoration: none; /* Optional: remove if you want underline on hover */
   }
 
-  .interviewcard-link {
+  .answerscard-link {
     color: #9c9a50; /* Less pastel, more pronounced gold */
     transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
   }
 
-  .interviewcard-link:hover,
-  .interviewcard-link:focus {
+  .answerscard-link:hover,
+  .answerscard-link:focus {
     background-color: var(--link-hover-background);
     color: var(--link-hover-color);
     text-decoration: none; /* Optional: remove if you want underline on hover */
@@ -167,36 +165,36 @@
 
 @media (prefers-color-scheme: dark) {
 
-  .interviewcard {
+  .answerscard {
     background-color: #3d5a4c; /* Soft dark green background */
     color: #c5b358; /* Soft gold text */
     box-shadow: 0 0 5px rgba(197, 179, 88, 0.5); /* Softer gold shadow */
   }
 
-  .interviewcard-header {
+  .answerscard-header {
     color: #c9b037; /* Paler gold links */
     transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
   }
 
-  .interviewcard-head-link {
+  .answerscard-head-link {
     color: #c9b037; /* Paler gold links */
     transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
   }
 
-  .interviewcard-head-link:hover,
-  .interviewcard-head-link:focus {
+  .answerscard-head-link:hover,
+  .answerscard-head-link:focus {
     background-color: var(--link-hover-background);
     color: var(--link-hover-color);
     text-decoration: none; /* Optional: remove if you want underline on hover */
   }
 
-  .interviewcard-link {
+  .answerscard-link {
     color: #c9b037; /* Paler gold links */
     transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
   }
 
-  .interviewcard-link:hover,
-  .interviewcard-link:focus {
+  .answerscard-link:hover,
+  .answerscard-link:focus {
     background-color: var(--link-hover-background);
     color: var(--link-hover-color);
     text-decoration: none; /* Optional: remove if you want underline on hover */
@@ -204,7 +202,7 @@
 }
 
 @media only screen and (max-width: 360px) {
-  .interviewcard {
+  .answerscard {
     grid-template-areas:"header header header"
     "tags tags tags"
     "links links links";
@@ -216,7 +214,7 @@
 }
 
 @media only screen and (max-width: 300px) {
-  .interviewcard-link {
+  .answerscard-link {
     border-radius: .25rem;
     display: inline-block;
     font-size: .55rem;
@@ -226,7 +224,7 @@
     margin-top: auto;
     padding: 0.25rem;
   }
-  .interviewcard-header {
+  .answerscard-header {
 
     font-size: 1em;
     font-weight: 600;

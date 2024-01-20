@@ -1,4 +1,8 @@
 <script lang="ts">
+  /**
+   * Comments for the Future:
+   * Taken from https://github.com/dimfeld/svelte-maplibre/ as of 2024-19-01
+   */
   import maplibre, { type LngLatLike, type PointLike } from 'maplibre-gl';
   import { createEventDispatcher } from 'svelte';
   import { updatedMarkerContext } from './context';
