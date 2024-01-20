@@ -26,7 +26,7 @@
     let page: number = 1;
     let maxPage: number = 1;
     let pages: number[] = [1];
-    let markers: { lngLat: [number, number]; label: string; name: string }[] = [];
+    let markers: { lngLat: [number, number]; label: string; name: string; address: string; }[] = [];
 
     $: {
       page = $PageStore.page;
@@ -93,6 +93,7 @@
         lngLat: [business.longitude as number, business.latitude as number],
         label: business.name,
         name: business.name,
+        address: business.address as string
       }
     })
   }
@@ -119,7 +120,7 @@
     standardControls
     style="https://basemaps.cartocdn.com/gl/positron-gl-style/style.json"
   >
-  {#each markers as { lngLat, label, name }, i (label)}
+  {#each markers as { lngLat, label, name, address }, i (label)}
     <Marker
       {lngLat}
       zIndex={markers.length - 1 - i}
@@ -129,7 +130,7 @@
       </span>
 
       <Popup openOn="click" offset={[0, -10]}>
-        <div class="text-lg font-bold">{name}</div>
+        <div class="text-lg font-bold">{name.concat(': ').concat(address)}</div>
       </Popup>
     </Marker>
   {/each}

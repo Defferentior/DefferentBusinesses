@@ -11,6 +11,7 @@ export interface BusinessCardInterface {
     wikipedia: string | null;
     longitude: number | null;
     latitude: number | null;
+    address: string | null;
     /*
     wikipedia: string;
     wappalyzer: string;
