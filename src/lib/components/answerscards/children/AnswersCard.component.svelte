@@ -31,22 +31,20 @@
     </div>
     {#if showFullText}
     <div>
-      <b>Questions Asked of</b>
+      <h2>Questions Asked of</h2>
      <SvelteMarkdown source={answerscard.answers} />
     </div>
-      <button id="lessButton" on:click={toggleFullText}>
-        {showFullText ? '...': ''}
-      </button>
     {:else}
     <div>
-      <b>Questions Asked of</b>
+      <h2>Questions Asked of</h2>
     </div>
     {/if}
     <button id="moreButton" on:click={toggleFullText}>
       {showFullText ? 'Less' : 'More'}
     </button>
-    <div>
-    </div>
+    <button id="wideButton" on:click={toggleFullText}>
+      ...
+    </button>
     {#if !answerscard.image}
     <img src={replacementImage} alt={answerscard.name} class={["answerscard-image","imgshow"].join(' ')} />
     {/if}
@@ -64,7 +62,7 @@
   grid-template-areas:"image header header header"
                       "image content content content"
                       "image content content content"
-                      "lessButton lessButton lessButton lessButton";
+                      "wideButton wideButton wideButton wideButton";
   grid-template-columns: min(20%,200px) 1fr auto;
   grid-template-rows: auto auto;
   margin: .25rem;
@@ -80,9 +78,9 @@
 }
 
 
-#lessButton {
+#wideButton {
     display: flex;
-    grid-area: lessButton;
+    grid-area: wideButton;
     justify-content: center;
     width: 100%;
     align-items: center;
@@ -211,7 +209,7 @@
     text-decoration: none; /* Optional: remove if you want underline on hover */
   }
 
-  #lessButton {
+  #wideButton {
     background-color: #e6e8d4;
     color: #757340;
   }
@@ -254,7 +252,7 @@
     text-decoration: none; /* Optional: remove if you want underline on hover */
   }
 
-  #lessButton {
+  #wideButton {
     background-color: #4f7565;
     color: #c5b358;
   }
