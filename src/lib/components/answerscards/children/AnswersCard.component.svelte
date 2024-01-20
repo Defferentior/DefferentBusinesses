@@ -33,6 +33,9 @@
     <div>
      <SvelteMarkdown source={answerscard.answers} />
     </div>
+      <button id="lessButton" on:click={toggleFullText}>
+        {showFullText ? '...': ''}
+      </button>
     {:else}
       <b>Questions Asked of</b>
     {/if}
@@ -57,7 +60,8 @@
   box-sizing: border-box;
   grid-template-areas:"image header header header"
                       "image content content content"
-                      "image content content content";
+                      "image content content content"
+                      "lessButton lessButton lessButton lessButton";
   grid-template-columns: min(20%,200px) 1fr auto;
   grid-template-rows: auto auto;
   margin: .25rem;
@@ -71,6 +75,23 @@
   border-radius: .25em;
   overflow: hidden;
 }
+
+
+#lessButton {
+    display: flex;
+    grid-area: lessButton;
+    justify-content: center;
+    width: 100%;
+    align-items: center;
+    border: none;
+    height: 1.5rem;
+    box-shadow: 0px -2px 5px 0px rgba(0,0,0,0.15);
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 2rem;
+  }
 
 .answerscard.expanded {
     max-height: none;
@@ -186,6 +207,11 @@
     color: var(--link-hover-color);
     text-decoration: none; /* Optional: remove if you want underline on hover */
   }
+
+  #lessButton {
+    background-color: #e6e8d4;
+    color: #757340;
+  }
 }
 
 @media (prefers-color-scheme: dark) {
@@ -223,6 +249,11 @@
     background-color: var(--link-hover-background);
     color: var(--link-hover-color);
     text-decoration: none; /* Optional: remove if you want underline on hover */
+  }
+
+  #lessButton {
+    background-color: #3d5f4f;
+    color: #c5b358;
   }
 }
 
