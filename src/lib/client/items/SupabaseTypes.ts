@@ -117,6 +117,45 @@ export interface Database {
           }
         ]
       }
+      "Businesses-Answers": {
+        Row: {
+          answers: string | null
+          id: string
+          image: string | null
+          name: string
+          url: string | null
+        }
+        Insert: {
+          answers?: string | null
+          id: string
+          image?: string | null
+          name: string
+          url?: string | null
+        }
+        Update: {
+          answers?: string | null
+          id?: string
+          image?: string | null
+          name?: string
+          url?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "Businesses-Answers_id_fkey"
+            columns: ["id"]
+            isOneToOne: true
+            referencedRelation: "Businesses"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "Businesses-Answers_name_fkey"
+            columns: ["name"]
+            isOneToOne: false
+            referencedRelation: "Businesses"
+            referencedColumns: ["name"]
+          }
+        ]
+      }
       defferentimportold: {
         Row: {
           builtwith: string | null
