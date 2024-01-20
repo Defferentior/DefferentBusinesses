@@ -12,7 +12,6 @@ export interface Database {
       Businesses: {
         Row: {
           address: string | null
-          answers: string | null
           builtwith: string | null
           craft: string | null
           description: string | null
@@ -30,7 +29,6 @@ export interface Database {
         }
         Insert: {
           address?: string | null
-          answers?: string | null
           builtwith?: string | null
           craft?: string | null
           description?: string | null
@@ -48,7 +46,6 @@ export interface Database {
         }
         Update: {
           address?: string | null
-          answers?: string | null
           builtwith?: string | null
           craft?: string | null
           description?: string | null
