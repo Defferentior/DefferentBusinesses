@@ -31,13 +31,16 @@
     </div>
     {#if showFullText}
     <div>
+      <b>Questions Asked of</b>
      <SvelteMarkdown source={answerscard.answers} />
     </div>
       <button id="lessButton" on:click={toggleFullText}>
         {showFullText ? '...': ''}
       </button>
     {:else}
+    <div>
       <b>Questions Asked of</b>
+    </div>
     {/if}
     <button id="moreButton" on:click={toggleFullText}>
       {showFullText ? 'Less' : 'More'}
