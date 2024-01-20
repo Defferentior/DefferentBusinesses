@@ -121,7 +121,7 @@
   width: 85%; /* Adjust width as needed */
   height: auto;
   grid-area: image;
-  align-self: center;
+  align-self: top;
   margin-right: 1em; /* Space between image and links */
   border-radius: 1em; /* Optional: Rounds the corners of the image */
   background: var(--image-background); /* Use a CSS variable for the background */
