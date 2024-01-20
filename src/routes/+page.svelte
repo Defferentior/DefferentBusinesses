@@ -102,6 +102,11 @@
 
 <title>{'Defferent Businesses'}</title>
 
+<nav>
+  <a href="/answers" >Answers</a>
+  <a href="/" >Businesses</a>
+</nav>
+
 <body id="root">
   <div class="Titlelist">
     <h1>Businesses</h1> <img src={defferentiator} alt={"logo"} class={["logo"].join(' ')} />
@@ -219,6 +224,14 @@
     opacity: 0;
   }
 
+  nav {
+    width: 100%; /* Take up the full width of the page */
+    box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.15); /* Add a shadow */
+    position: sticky; /* Make the nav stick to the top of the page */
+    height: 1.5em; /* Specify the height of the nav */
+    top: 0; /* Stick to the top */
+    z-index: 100; /* Ensure the nav is above other elements */
+  }
 
   @media (prefers-color-scheme: dark) {
     :root {
@@ -233,6 +246,14 @@
     }
 
     address a {
+      color: #757340;
+    }
+
+    nav {
+      background: #2e433a; /* Add a background color */
+    }
+
+    nav a {
       color: #757340;
     }
 
@@ -251,6 +272,14 @@
   }
 
   address a {
+    color: #757340;
+  }
+
+  nav {
+    background: #d6e8d4; /* Add a background color */
+  }
+
+  nav a {
     color: #757340;
   }
   

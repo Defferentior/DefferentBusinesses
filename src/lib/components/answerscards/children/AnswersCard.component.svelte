@@ -252,7 +252,7 @@
   }
 
   #lessButton {
-    background-color: #3d5f4f;
+    background-color: #4f7565;
     color: #c5b358;
   }
 }
