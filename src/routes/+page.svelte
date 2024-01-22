@@ -120,10 +120,10 @@ $: sortedBusinesses = data.Businesses ? [...data.Businesses].sort((a, b) => {
     standardControls
     style="https://basemaps.cartocdn.com/gl/positron-gl-style/style.json"
   >
-  {#each markers.reverse() as { lngLat, label, name }, i (label)}
+  {#each markers as { lngLat, label, name }, i (label)}
     <Marker
       {lngLat}
-      zIndex={ 1+ (markers.length - 1 - i)*.01}
+      zIndex={ 1+ (markers.length - 1 - i)}
     >
       <span>
         {label.substring(0,4)}
