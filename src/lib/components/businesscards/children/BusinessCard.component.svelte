@@ -5,6 +5,7 @@
     import path1 from '$lib/images/path1.svg';
 
     let replacementImage = path1;
+    let screenWidth: number;
 
     export let businesscard : BusinessCardInterface = {
         id: '0',
@@ -20,18 +21,51 @@
         longitude: 0,
         latitude: 0,
         address: '',
+        glassdoor: '',
+        crunchbase: '',
+        cbinsights: '',
+        wappalyzer: ''
 
     };
 
-    let links = [
+    onMount(() => {
+      screenWidth = window.innerWidth;
+      window.addEventListener('resize', () => {
+        screenWidth = window.innerWidth;
+      });
+    });
+
+    let links: any[] = [  ]
+
+
+  $: {
+    links = screenWidth > 900 ? [
       { name: 'Website', url: businesscard.url || undefined },
-      { name: 'LinkedIn', url: businesscard.linkedin },
       { name: 'SimilarWeb', url: businesscard.similarweb },
+      { name: 'LinkedIn', url: businesscard.linkedin },
       { name: 'BuiltWith', url: businesscard.builtwith },
+      { name: 'Glassdoor', url: businesscard.glassdoor },
+      { name: 'CB Insights', url: businesscard.cbinsights },
+      { name: 'Crunchbase', url: businesscard.crunchbase },
+      { name: 'Wappalyzer', url: businesscard.wappalyzer },
       { name: 'Craft.co', url: businesscard.craft},
       { name: 'Wikipedia', url: businesscard.wikipedia},
       { name: 'Dun & Bradstreet', url: businesscard.dunandbradsheet },
-  ].filter(link => link.url);
+    ] : [
+      { name: 'Website', url: businesscard.url || undefined },
+      { name: 'LinkedIn', url: businesscard.linkedin },
+      { name: 'BuiltWith', url: businesscard.builtwith },
+      { name: 'Glassdoor', url: businesscard.glassdoor },
+      { name: 'CB Insights', url: businesscard.cbinsights },
+      { name: 'Crunchbase', url: businesscard.crunchbase },
+      { name: 'Wappalyzer', url: businesscard.wappalyzer },
+      { name: 'Craft.co', url: businesscard.craft},
+      { name: 'Wikipedia', url: businesscard.wikipedia},
+      { name: 'SimilarWeb', url: businesscard.similarweb },
+      { name: 'Dun & Bradstreet', url: businesscard.dunandbradsheet },
+    ];
+    links = links.filter(link => link.url);
+  }
 
 </script>
 
@@ -284,6 +318,7 @@
   .businesscard-image {
       width: 75%;
   }
+}
 
 /* Hide all links by default */
 .businesscard-link {
@@ -327,6 +362,25 @@
   }
 }
 
+/* Show the eighth link on large screens and up */
+@media (min-width: 560px) {
+  .link-7 {
+    display: inline-block;
+  }
+}
+
+/* Show the ninth link on large screens and up */
+@media (min-width: 630px) {
+  .link-8 {
+    display: inline-block;
+  }
+}
+
+/* Show the tenth link on large screens and up */
+@media (min-width: 700px) {
+  .link-9 {
+    display: inline-block;
+  }
 }
 
 </style>

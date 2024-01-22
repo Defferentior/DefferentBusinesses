@@ -5,21 +5,15 @@ export interface BusinessCardInterface {
     image: string | null;
     similarweb: string | null;
     builtwith: string | null;
+    wappalyzer: string;
+    wikipedia: string | null;
     linkedin: string | null;
     dunandbradsheet: string | null;
     craft: string | null;
-    wikipedia: string | null;
+    crunchbase: string;
+    cbinsights: string;
+    glassdoor: string;
     longitude: number | null;
     latitude: number | null;
     address: string | null;
-    /*
-    wikipedia: string;
-    wappalyzer: string;
-    crunchbase: string;
-    g2: string;
-    trustpilot: string;
-    yellowpages: string;
-    yelp: string;
-    appstore: string;
-    googleplay: string;*/
 }

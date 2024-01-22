@@ -13,9 +13,12 @@ export interface Database {
         Row: {
           address: string | null
           builtwith: string | null
+          cbinsights: string | null
           craft: string | null
+          crunchbase: string | null
           description: string | null
           dunandbradsheet: string | null
+          glassdoor: string | null
           id: string
           image: string | null
           latitude: number | null
@@ -25,14 +28,18 @@ export interface Database {
           priority: number | null
           similarweb: string | null
           url: string | null
+          wappalyzer: string | null
           wikipedia: string | null
         }
         Insert: {
           address?: string | null
           builtwith?: string | null
+          cbinsights?: string | null
           craft?: string | null
+          crunchbase?: string | null
           description?: string | null
           dunandbradsheet?: string | null
+          glassdoor?: string | null
           id?: string
           image?: string | null
           latitude?: number | null
@@ -42,14 +49,18 @@ export interface Database {
           priority?: number | null
           similarweb?: string | null
           url?: string | null
+          wappalyzer?: string | null
           wikipedia?: string | null
         }
         Update: {
           address?: string | null
           builtwith?: string | null
+          cbinsights?: string | null
           craft?: string | null
+          crunchbase?: string | null
           description?: string | null
           dunandbradsheet?: string | null
+          glassdoor?: string | null
           id?: string
           image?: string | null
           latitude?: number | null
@@ -59,16 +70,19 @@ export interface Database {
           priority?: number | null
           similarweb?: string | null
           url?: string | null
+          wappalyzer?: string | null
           wikipedia?: string | null
         }
         Relationships: []
       }
       Businesses_tags: {
         Row: {
+          answered: boolean
           architecture: boolean
           banking: boolean
           id: string
           legal: boolean
+          marketing: boolean | null
           name: string
           real_estate: boolean
           software: boolean
@@ -76,10 +90,12 @@ export interface Database {
           video: boolean
         }
         Insert: {
+          answered?: boolean
           architecture?: boolean
           banking?: boolean
           id?: string
           legal?: boolean
+          marketing?: boolean | null
           name: string
           real_estate?: boolean
           software?: boolean
@@ -87,10 +103,12 @@ export interface Database {
           video?: boolean
         }
         Update: {
+          answered?: boolean
           architecture?: boolean
           banking?: boolean
           id?: string
           legal?: boolean
+          marketing?: boolean | null
           name?: string
           real_estate?: boolean
           software?: boolean
@@ -152,30 +170,6 @@ export interface Database {
             referencedColumns: ["name"]
           }
         ]
-      }
-      defferentimportold: {
-        Row: {
-          builtwith: string | null
-          id: string
-          name: string | null
-          similarweb: string | null
-          url: string | null
-        }
-        Insert: {
-          builtwith?: string | null
-          id?: string
-          name?: string | null
-          similarweb?: string | null
-          url?: string | null
-        }
-        Update: {
-          builtwith?: string | null
-          id?: string
-          name?: string | null
-          similarweb?: string | null
-          url?: string | null
-        }
-        Relationships: []
       }
     }
     Views: {

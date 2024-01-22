@@ -40,15 +40,15 @@
     let sortedBusinesses: BusinessCardInterface[] = [];
     let paginatedBusinesses: BusinessCardInterface[] = [];
 
-    $: sortedBusinesses = [...data.Businesses].sort((a, b) => {
-      if (a.image === null) return 1;
-      if (b.image === null) return -1;
-      return a.image.localeCompare(b.image);
-    }).sort((a, b) => {
-      if (a.priority === null) return -1;
-      if (b.priority === null) return 1;
-      return b.priority - a.priority;
-    })
+$: sortedBusinesses = data.Businesses ? [...data.Businesses].sort((a, b) => {
+    if (a.image === null) return 1;
+    if (b.image === null) return -1;
+    return a.image.localeCompare(b.image);
+  }).sort((a, b) => {
+    if (a.priority === null) return -1;
+    if (b.priority === null) return 1;
+    return b.priority - a.priority;
+  }) : [];
 
   $: filteredBusinesses = sortedBusinesses.filter(business => 
       business.name.toLowerCase().includes(searchTerm.toLowerCase()) 
