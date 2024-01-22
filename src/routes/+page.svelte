@@ -26,7 +26,7 @@
     let page: number = 1;
     let maxPage: number = 1;
     let pages: number[] = [1];
-    let markers: { lngLat: [number, number]; label: string; name: string; address: string; }[] = [];
+    let markers: { lngLat: [number, number]; label: string; name: string }[] = [];
 
     $: {
       page = $PageStore.page;
@@ -93,7 +93,7 @@ $: sortedBusinesses = data.Businesses ? [...data.Businesses].sort((a, b) => {
         lngLat: [business.longitude as number, business.latitude as number],
         label: business.name,
         name: business.name,
-        address: business.address as string
+        //address: business.address as string
       }
     })
   }
@@ -120,7 +120,7 @@ $: sortedBusinesses = data.Businesses ? [...data.Businesses].sort((a, b) => {
     standardControls
     style="https://basemaps.cartocdn.com/gl/positron-gl-style/style.json"
   >
-  {#each markers as { lngLat, label, name, address }, i (label)}
+  {#each markers as { lngLat, label, name }, i (label)}
     <Marker
       {lngLat}
       zIndex={markers.length - 1 - i}
@@ -130,7 +130,7 @@ $: sortedBusinesses = data.Businesses ? [...data.Businesses].sort((a, b) => {
       </span>
 
       <Popup openOn="click" offset={[0, -10]}>
-        <div class="text-lg font-bold">{name.concat(': ').concat(address)}</div>
+        <div class="text-lg font-bold">{name}</div>
       </Popup>
     </Marker>
   {/each}

@@ -5,14 +5,14 @@ export interface BusinessCardInterface {
     image: string | null;
     similarweb: string | null;
     builtwith: string | null;
-    wappalyzer: string;
+    wappalyzer: string | null;
     wikipedia: string | null;
     linkedin: string | null;
     dunandbradsheet: string | null;
     craft: string | null;
-    crunchbase: string;
-    cbinsights: string;
-    glassdoor: string;
+    crunchbase: string | null;
+    cbinsights: string | null;
+    glassdoor: string | null;
     longitude: number | null;
     latitude: number | null;
     address: string | null;
