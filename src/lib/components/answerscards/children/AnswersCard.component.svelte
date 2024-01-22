@@ -144,10 +144,10 @@
   height: auto;
   grid-area: image;
   align-self: top;
-  margin-right: 1em; /* Space between image and links */
+  margin-right: 2em; /* Space between image and links */
   border-radius: 1em; /* Optional: Rounds the corners of the image */
   background: var(--image-background); /* Use a CSS variable for the background */
-  padding: .4em; /* Adjust as needed, creates space around the image */
+  padding: 0.2em; /* Adjust as needed, creates space around the image */
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.2); /* Optional: Adds shadow for depth */
   object-fit: cover; /* Ensures the image covers the padding area */
 }
@@ -313,19 +313,13 @@
   }
 }
 
-@media only screen and (max-width: 700px) {
-  .businesscard-image {
-      width: 80%;
-  }
-}
-
 @media only screen and (max-width: 500px) {
   .businesscard {
     padding: .25rem;
   }
 
   .businesscard-image {
-      width: 75%;
+      width: 70%;
   }
 }
 

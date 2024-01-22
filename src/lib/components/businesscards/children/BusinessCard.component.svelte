@@ -383,4 +383,11 @@
   }
 }
 
+/* Show the eleventh link on large screens and up */
+@media (min-width: 770px) {
+  .link-10 {
+    display: inline-block;
+  }
+}
+
 </style>
