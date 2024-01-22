@@ -120,10 +120,10 @@ $: sortedBusinesses = data.Businesses ? [...data.Businesses].sort((a, b) => {
     standardControls
     style="https://basemaps.cartocdn.com/gl/positron-gl-style/style.json"
   >
-  {#each markers as { lngLat, label, name }, i (label)}
+  {#each markers.reverse() as { lngLat, label, name }, i (label)}
     <Marker
       {lngLat}
-      zIndex={markers.length - 1 - i}
+      zIndex={ 1+ (markers.length - 1 - i)*.01}
     >
       <span>
         {label.substring(0,4)}
@@ -290,5 +290,13 @@ $: sortedBusinesses = data.Businesses ? [...data.Businesses].sort((a, b) => {
 :global(.map) {
     height: 400px;
   }
+
+  .leaflet-control {
+  z-index: 1000;
+}
+
+.map {
+  z-index: 1000;
+}
 
 </style>
