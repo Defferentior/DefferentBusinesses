@@ -16,6 +16,69 @@ export interface Database {
           cbinsights: string | null
           craft: string | null
           crunchbase: string | null
+          dunandbradsheet: string | null
+          glassdoor: string | null
+          id: string
+          image: string | null
+          latitude: number | null
+          linkedin: string | null
+          longitude: number | null
+          name: string
+          priority: number | null
+          similarweb: string | null
+          url: string | null
+          wappalyzer: string | null
+          wikipedia: string | null
+        }
+        Insert: {
+          address?: string | null
+          builtwith?: string | null
+          cbinsights?: string | null
+          craft?: string | null
+          crunchbase?: string | null
+          dunandbradsheet?: string | null
+          glassdoor?: string | null
+          id?: string
+          image?: string | null
+          latitude?: number | null
+          linkedin?: string | null
+          longitude?: number | null
+          name: string
+          priority?: number | null
+          similarweb?: string | null
+          url?: string | null
+          wappalyzer?: string | null
+          wikipedia?: string | null
+        }
+        Update: {
+          address?: string | null
+          builtwith?: string | null
+          cbinsights?: string | null
+          craft?: string | null
+          crunchbase?: string | null
+          dunandbradsheet?: string | null
+          glassdoor?: string | null
+          id?: string
+          image?: string | null
+          latitude?: number | null
+          linkedin?: string | null
+          longitude?: number | null
+          name?: string
+          priority?: number | null
+          similarweb?: string | null
+          url?: string | null
+          wappalyzer?: string | null
+          wikipedia?: string | null
+        }
+        Relationships: []
+      }
+      Businesses_add: {
+        Row: {
+          address: string | null
+          builtwith: string | null
+          cbinsights: string | null
+          craft: string | null
+          crunchbase: string | null
           description: string | null
           dunandbradsheet: string | null
           glassdoor: string | null
