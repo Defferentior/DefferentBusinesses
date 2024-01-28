@@ -123,7 +123,7 @@ $: sortedBusinesses = data.Businesses ? [...data.Businesses].sort((a, b) => {
   {#each markers as { lngLat, label, name }, i (label)}
     <Marker
       {lngLat}
-      zIndex={ 1+ (markers.length - 1 - i)}
+      zIndex={ (markers.length - i)*3/markers.length}
     >
       <span>
         {label.substring(0,4)}
