@@ -23,6 +23,7 @@
     let filterLinkedin = false;
     let filterImage = false;
     let filterLocation = false;
+    let filterTableau = false;
     let page: number = 1;
     let maxPage: number = 1;
     let pages: number[] = [1];
@@ -55,6 +56,7 @@ $: sortedBusinesses = data.Businesses ? [...data.Businesses].sort((a, b) => {
       && (!filterLinkedin || business.linkedin !== null)
       && (!filterImage || business.image !== null)
       && (!filterLocation || (business.longitude !== null && business.latitude !== null))
+      && (!filterTableau || business.tableau !== null)
   );
 
   $: if (maxPage === 0){
@@ -139,6 +141,11 @@ $: sortedBusinesses = data.Businesses ? [...data.Businesses].sort((a, b) => {
   <h3>Only Include Businesses With:  </h3>
 
   <div>
+    <div>
+      <b>
+      <input name="tableaucheckbox" type="checkbox" bind:checked={filterTableau} /> Defferentiator Tableau Projects
+    </b>
+    </div>
     <input name="linkedincheckbox" type="checkbox" bind:checked={filterLinkedin} /> LinkedIn
     <input name="imagecheckbox" type="checkbox" bind:checked={filterImage} /> Picture |
     <input name="locationcheckbox" type="checkbox" bind:checked={filterLocation} /> Location

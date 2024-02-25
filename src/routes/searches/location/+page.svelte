@@ -7,11 +7,13 @@
     let searchTerm = '';
     let filterLinkedin = false;
     let filterImage = false;
+    let filterTableau = false;
     
     $: filteredBusinesses = data.Businesses.filter(business => 
         business.name.toLowerCase().includes(searchTerm.toLowerCase()) 
         && (!filterLinkedin || business.linkedin !== null)
         && (!filterImage || business.image !== null)
+        && (!filterTableau || business.tableau !== null)
     );
 </script>
 
@@ -23,6 +25,9 @@
     <a href={'/searches/interview/'} class="businesscard-link"> Previous</a>
 
     <h3>Include Businesses With:  </h3>
+    <div>
+      <input type="checkbox" bind:checked={filterTableau} /> Defferentior Tableau Projects
+    </div>
     <div>
       <input type="checkbox" bind:checked={filterLinkedin} /> LinkedIn
       <input type="checkbox" bind:checked={filterImage} /> Picture |

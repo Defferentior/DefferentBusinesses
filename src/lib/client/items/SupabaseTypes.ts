@@ -6,7 +6,7 @@ export type Json =
   | { [key: string]: Json | undefined }
   | Json[]
 
-export interface Database {
+export type Database = {
   public: {
     Tables: {
       Businesses: {
@@ -26,6 +26,7 @@ export interface Database {
           name: string
           priority: number | null
           similarweb: string | null
+          tableau: string | null
           url: string | null
           wappalyzer: string | null
           wikipedia: string | null
@@ -46,6 +47,7 @@ export interface Database {
           name: string
           priority?: number | null
           similarweb?: string | null
+          tableau?: string | null
           url?: string | null
           wappalyzer?: string | null
           wikipedia?: string | null
@@ -66,6 +68,7 @@ export interface Database {
           name?: string
           priority?: number | null
           similarweb?: string | null
+          tableau?: string | null
           url?: string | null
           wappalyzer?: string | null
           wikipedia?: string | null
@@ -140,9 +143,9 @@ export interface Database {
       }
       Businesses_tags: {
         Row: {
-          answered: boolean
           architecture: boolean
           banking: boolean
+          electronics: boolean
           id: string
           legal: boolean
           marketing: boolean | null
@@ -153,9 +156,9 @@ export interface Database {
           video: boolean
         }
         Insert: {
-          answered?: boolean
           architecture?: boolean
           banking?: boolean
+          electronics?: boolean
           id?: string
           legal?: boolean
           marketing?: boolean | null
@@ -166,9 +169,9 @@ export interface Database {
           video?: boolean
         }
         Update: {
-          answered?: boolean
           architecture?: boolean
           banking?: boolean
+          electronics?: boolean
           id?: string
           legal?: boolean
           marketing?: boolean | null
@@ -198,23 +201,29 @@ export interface Database {
       "Businesses-Answers": {
         Row: {
           answers: string | null
+          asked_questions: boolean
           id: string
           image: string | null
           name: string
+          question_accessible: boolean
           url: string | null
         }
         Insert: {
           answers?: string | null
+          asked_questions?: boolean
           id: string
           image?: string | null
           name: string
+          question_accessible?: boolean
           url?: string | null
         }
         Update: {
           answers?: string | null
+          asked_questions?: boolean
           id?: string
           image?: string | null
           name?: string
+          question_accessible?: boolean
           url?: string | null
         }
         Relationships: [

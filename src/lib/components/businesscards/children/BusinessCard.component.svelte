@@ -24,7 +24,8 @@
         glassdoor: '',
         crunchbase: '',
         cbinsights: '',
-        wappalyzer: ''
+        wappalyzer: '',
+        tableau: ''
 
     };
 
@@ -41,6 +42,7 @@
   $: {
     links = screenWidth > 900 ? [
       { name: 'Website', url: businesscard.url || undefined },
+      { name: 'Tableau Project', url: businesscard.tableau},
       { name: 'SimilarWeb', url: businesscard.similarweb },
       { name: 'LinkedIn', url: businesscard.linkedin },
       { name: 'BuiltWith', url: businesscard.builtwith },
