@@ -55,6 +55,7 @@
       { name: 'Dun & Bradstreet', url: businesscard.dunandbradsheet },
     ] : [
       { name: 'Website', url: businesscard.url || undefined },
+      { name: 'Tableau Project', url: businesscard.tableau},
       { name: 'LinkedIn', url: businesscard.linkedin },
       { name: 'BuiltWith', url: businesscard.builtwith },
       { name: 'Glassdoor', url: businesscard.glassdoor },
