@@ -164,6 +164,14 @@ $: sortedBusinesses = data.Businesses ? [...data.Businesses].sort((a, b) => {
 
   <div class="contactbar">
     <address> <a href="mailto:timemctigue@gmail.com">E-Mail</a></address>
+    <address> <a href="https://www.linkedin.com/in/timothy-mctigue-30507429a/">Linkedin</a></address>
+  </div>
+  <div>
+    <p>
+      Please, if you have an oppurtunity to hire me, I would be very grateful.
+    </p>
+    <p>
+      I am extremely unemployed and so can't find a job or someone to hire me despite my resume, however I work consistently, I work hard, I'm a self starter, I find insights and I love data.</p>
   </div>
 </body>
 

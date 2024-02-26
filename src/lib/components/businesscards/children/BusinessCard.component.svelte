@@ -25,7 +25,8 @@
         crunchbase: '',
         cbinsights: '',
         wappalyzer: '',
-        tableau: ''
+        tableau: '',
+        category: ''
 
     };
 
@@ -80,6 +81,11 @@
         </a>
       </h2>
     </div>
+    <div class="business-card-tags">
+      <span>
+        {businesscard.category}
+      </span>
+    </div>
     <div class="businesscard-links">
       {#each links as link, i (link.name)}
         <a class="businesscard-link link-{i}" href={link.url}>{link.name}</a>
@@ -99,8 +105,8 @@
   display: grid; /* Enable Grid */
   flex-grow: 1;
   box-sizing: border-box;
-  grid-template-areas:"image header header header"
-                      "image tags tags tags"
+  grid-template-areas:"image header header tags"
+                      "image links links links"
                       "image links links links";
   grid-template-columns: min(20%,200px) 1fr auto;
   grid-template-rows: auto auto;

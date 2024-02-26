@@ -13,6 +13,7 @@ export type Database = {
         Row: {
           address: string | null
           builtwith: string | null
+          category: string | null
           cbinsights: string | null
           craft: string | null
           crunchbase: string | null
@@ -34,6 +35,7 @@ export type Database = {
         Insert: {
           address?: string | null
           builtwith?: string | null
+          category?: string | null
           cbinsights?: string | null
           craft?: string | null
           crunchbase?: string | null
@@ -55,6 +57,7 @@ export type Database = {
         Update: {
           address?: string | null
           builtwith?: string | null
+          category?: string | null
           cbinsights?: string | null
           craft?: string | null
           crunchbase?: string | null
@@ -79,6 +82,7 @@ export type Database = {
         Row: {
           address: string | null
           builtwith: string | null
+          category: string
           cbinsights: string | null
           craft: string | null
           crunchbase: string | null
@@ -93,6 +97,8 @@ export type Database = {
           name: string
           priority: number | null
           similarweb: string | null
+          tableau: string | null
+          testURL: string | null
           url: string | null
           wappalyzer: string | null
           wikipedia: string | null
@@ -100,6 +106,7 @@ export type Database = {
         Insert: {
           address?: string | null
           builtwith?: string | null
+          category: string
           cbinsights?: string | null
           craft?: string | null
           crunchbase?: string | null
@@ -114,6 +121,8 @@ export type Database = {
           name: string
           priority?: number | null
           similarweb?: string | null
+          tableau?: string | null
+          testURL?: string | null
           url?: string | null
           wappalyzer?: string | null
           wikipedia?: string | null
@@ -121,6 +130,7 @@ export type Database = {
         Update: {
           address?: string | null
           builtwith?: string | null
+          category?: string
           cbinsights?: string | null
           craft?: string | null
           crunchbase?: string | null
@@ -135,6 +145,8 @@ export type Database = {
           name?: string
           priority?: number | null
           similarweb?: string | null
+          tableau?: string | null
+          testURL?: string | null
           url?: string | null
           wappalyzer?: string | null
           wikipedia?: string | null
@@ -143,9 +155,8 @@ export type Database = {
       }
       Businesses_tags: {
         Row: {
-          architecture: boolean
-          banking: boolean
           electronics: boolean
+          housing: boolean
           id: string
           legal: boolean
           marketing: boolean | null
@@ -156,9 +167,8 @@ export type Database = {
           video: boolean
         }
         Insert: {
-          architecture?: boolean
-          banking?: boolean
           electronics?: boolean
+          housing?: boolean
           id?: string
           legal?: boolean
           marketing?: boolean | null
@@ -169,9 +179,8 @@ export type Database = {
           video?: boolean
         }
         Update: {
-          architecture?: boolean
-          banking?: boolean
           electronics?: boolean
+          housing?: boolean
           id?: string
           legal?: boolean
           marketing?: boolean | null
@@ -183,18 +192,18 @@ export type Database = {
         }
         Relationships: [
           {
-            foreignKeyName: "Businesses_tags_id_fkey"
-            columns: ["id"]
-            isOneToOne: true
-            referencedRelation: "Businesses"
-            referencedColumns: ["id"]
-          },
-          {
             foreignKeyName: "Businesses_tags_name_fkey"
             columns: ["name"]
             isOneToOne: true
             referencedRelation: "Businesses"
             referencedColumns: ["name"]
+          },
+          {
+            foreignKeyName: "public_Businesses_tags_id_fkey"
+            columns: ["id"]
+            isOneToOne: true
+            referencedRelation: "Businesses"
+            referencedColumns: ["id"]
           }
         ]
       }
