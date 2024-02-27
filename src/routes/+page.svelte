@@ -43,6 +43,14 @@
     let sortedBusinesses: BusinessCardInterface[] = [];
     let paginatedBusinesses: BusinessCardInterface[] = [];
 
+    function toggleSelectAll() {
+    if (selectedCategories.length === categories.length) {
+      selectedCategories = []; // deselect all
+    } else {
+      selectedCategories = [...categories]; // select all
+    }
+  }
+
 $: sortedBusinesses = data.Businesses ? [...data.Businesses].sort((a, b) => {
     if (a.image === null) return 1;
     if (b.image === null) return -1;
@@ -154,7 +162,7 @@ $: sortedBusinesses = data.Businesses ? [...data.Businesses].sort((a, b) => {
     <input name="locationcheckbox" type="checkbox" bind:checked={filterLocation} /> Location
     <div>
       <input name="namesearch" type="text" bind:value={searchTerm} placeholder="Search..." /> Name
-    </div>
+    </div>    
     {#each categories as category (category)}
     <div class="category-container">
       <label>
@@ -162,7 +170,10 @@ $: sortedBusinesses = data.Businesses ? [...data.Businesses].sort((a, b) => {
         {category}
       </label>
     </div>
-{/each}
+    {/each}
+    <button on:click={toggleSelectAll}>
+      {selectedCategories.length === categories.length ? 'Select None' : 'Select All'}
+    </button>
   </div>
 
 
