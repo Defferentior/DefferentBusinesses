@@ -162,7 +162,9 @@ $: sortedBusinesses = data.Businesses ? [...data.Businesses].sort((a, b) => {
     <input name="locationcheckbox" type="checkbox" bind:checked={filterLocation} /> Location
     <div>
       <input name="namesearch" type="text" bind:value={searchTerm} placeholder="Search..." /> Name
-    </div>    
+    </div>  
+    <div class="tags-section">
+    <b>Tags:</b>
     {#each categories as category (category)}
     <div class="category-container">
       <label>
@@ -174,6 +176,7 @@ $: sortedBusinesses = data.Businesses ? [...data.Businesses].sort((a, b) => {
     <button on:click={toggleSelectAll}>
       {selectedCategories.length === categories.length ? 'Select None' : 'Select All'}
     </button>
+  </div> 
   </div>
 
 
@@ -221,6 +224,10 @@ $: sortedBusinesses = data.Businesses ? [...data.Businesses].sort((a, b) => {
     list-style: none;
   }
 
+  .tags-section {
+   margin-top: 1em;
+   margin-bottom: 1em;
+  }
 
   .PageNumbers {
       display: flex;
