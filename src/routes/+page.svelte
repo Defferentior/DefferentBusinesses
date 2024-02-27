@@ -195,13 +195,10 @@ $: sortedBusinesses = data.Businesses ? [...data.Businesses].sort((a, b) => {
     <p>
       I am extremely unemployed and so can't find a job or someone to hire me due to my resume, however I work consistently, I work hard, I'm a self starter, I find insights and I love data. Please, if you have an oppurtunity to hire me, I would be very grateful. I am also looking for a mentor, if you are interested in mentoring me, I would be very grateful.
     </p>
-      <address>
-      <a href="mailto:timemctigue@gmail.com">-Tim McTigue</a>
-    </address>
+    <div class="contactbar">
+      <address><a href="mailto:timemctigue@gmail.com">-Tim McTigue</a></address>
+    </div>
   </div>
-  <p>
-    
-  </p>
 
 </body>
 
