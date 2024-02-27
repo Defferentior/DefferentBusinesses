@@ -188,13 +188,21 @@ $: sortedBusinesses = data.Businesses ? [...data.Businesses].sort((a, b) => {
     <address> <a href="mailto:timemctigue@gmail.com">E-Mail</a></address>
     <address> <a href="https://www.linkedin.com/in/timothy-mctigue-30507429a/">Linkedin</a></address>
   </div>
-  <div>
+  <p class="info-ps">
+    Strudistate is on mondays, Bitware is on tuesdays, Bizimerce is on wednesdays, Medical is on thursdays, Gooducts is on fridays, Entertainment is on saturdays, and Forcetech is on sundays.
+  </p>
+  <div class="ending-text">
     <p>
-      I am extremely unemployed and so can't find a job or someone to hire me despite my resume, however I work consistently, I work hard, I'm a self starter, I find insights and I love data.</p>
+      I am extremely unemployed and so can't find a job or someone to hire me due to my resume, however I work consistently, I work hard, I'm a self starter, I find insights and I love data. Please, if you have an oppurtunity to hire me, I would be very grateful. I am also looking for a mentor, if you are interested in mentoring me, I would be very grateful.
+    </p>
+      <address>
+      <a href="mailto:timemctigue@gmail.com">-Tim McTigue</a>
+    </address>
   </div>
   <p>
-    Please, if you have an oppurtunity to hire me, I would be very grateful.
+    
   </p>
+
 </body>
 
 
@@ -221,6 +229,14 @@ $: sortedBusinesses = data.Businesses ? [...data.Businesses].sort((a, b) => {
       display: flex;
       gap: 5px;
       justify-content: center;
+  }
+
+  .info-ps {
+    font-size: .9em;
+  }
+
+  .ending-text {
+    font-size: .75em;
   }
 
   .GoToPage {
