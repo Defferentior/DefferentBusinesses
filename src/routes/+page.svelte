@@ -232,7 +232,7 @@ $: sortedBusinesses = data.Businesses ? [...data.Businesses].sort((a, b) => {
   }
 
   .info-ps {
-    font-size: .9em;
+    font-size: 1em;
   }
 
   .ending-text {
