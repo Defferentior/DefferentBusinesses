@@ -23,7 +23,7 @@
     let filterLinkedin = false;
     let filterImage = false;
     let filterLocation = false;
-    let filterTableau = false;
+    let filterBizInt = false;
     let categories = ['Forcetech', 'Strudistate', 'Bitware', 'Bizimerce','Medical','Gooducts','Entertainment'];
     let selectedCategories = [...categories];
     let page: number = 1;
@@ -66,7 +66,7 @@ $: sortedBusinesses = data.Businesses ? [...data.Businesses].sort((a, b) => {
       && (!filterLinkedin || business.linkedin !== null)
       && (!filterImage || business.image !== null)
       && (!filterLocation || (business.longitude !== null && business.latitude !== null))
-      && (!filterTableau || business.tableau !== null)
+      && (!filterBizInt || business.biz_int !== null)
       && selectedCategories.includes(business.category)
   );
 
@@ -154,7 +154,7 @@ $: sortedBusinesses = data.Businesses ? [...data.Businesses].sort((a, b) => {
   <div>
     <div>
       <b>
-      <input name="tableaucheckbox" type="checkbox" bind:checked={filterTableau} /> Defferentiator Tableau Projects
+      <input name="bizintcheckbox" type="checkbox" bind:checked={filterBizInt} /> Defferentiator Business Intelligence Projects
     </b>
     </div>
     <input name="linkedincheckbox" type="checkbox" bind:checked={filterLinkedin} /> LinkedIn

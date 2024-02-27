@@ -12,6 +12,7 @@ export type Database = {
       Businesses: {
         Row: {
           address: string | null
+          biz_int: string | null
           builtwith: string | null
           category: string
           cbinsights: string | null
@@ -27,13 +28,14 @@ export type Database = {
           name: string
           priority: number | null
           similarweb: string | null
-          tableau: string | null
+          "tableau index": number
           url: string
           wappalyzer: string | null
           wikipedia: string | null
         }
         Insert: {
           address?: string | null
+          biz_int?: string | null
           builtwith?: string | null
           category: string
           cbinsights?: string | null
@@ -49,13 +51,14 @@ export type Database = {
           name: string
           priority?: number | null
           similarweb?: string | null
-          tableau?: string | null
+          "tableau index"?: number
           url?: string
           wappalyzer?: string | null
           wikipedia?: string | null
         }
         Update: {
           address?: string | null
+          biz_int?: string | null
           builtwith?: string | null
           category?: string
           cbinsights?: string | null
@@ -71,7 +74,7 @@ export type Database = {
           name?: string
           priority?: number | null
           similarweb?: string | null
-          tableau?: string | null
+          "tableau index"?: number
           url?: string
           wappalyzer?: string | null
           wikipedia?: string | null
@@ -81,6 +84,7 @@ export type Database = {
       Businesses_add: {
         Row: {
           address: string | null
+          biz_int: string | null
           builtwith: string | null
           category: string
           cbinsights: string | null
@@ -97,7 +101,6 @@ export type Database = {
           name: string
           priority: number | null
           similarweb: string | null
-          tableau: string | null
           testURL: string | null
           url: string | null
           wappalyzer: string | null
@@ -105,6 +108,7 @@ export type Database = {
         }
         Insert: {
           address?: string | null
+          biz_int?: string | null
           builtwith?: string | null
           category: string
           cbinsights?: string | null
@@ -121,7 +125,6 @@ export type Database = {
           name: string
           priority?: number | null
           similarweb?: string | null
-          tableau?: string | null
           testURL?: string | null
           url?: string | null
           wappalyzer?: string | null
@@ -129,6 +132,7 @@ export type Database = {
         }
         Update: {
           address?: string | null
+          biz_int?: string | null
           builtwith?: string | null
           category?: string
           cbinsights?: string | null
@@ -145,7 +149,6 @@ export type Database = {
           name?: string
           priority?: number | null
           similarweb?: string | null
-          tableau?: string | null
           testURL?: string | null
           url?: string | null
           wappalyzer?: string | null

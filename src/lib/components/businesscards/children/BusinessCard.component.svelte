@@ -25,7 +25,7 @@
         crunchbase: '',
         cbinsights: '',
         wappalyzer: '',
-        tableau: '',
+        biz_int: '',
         category: ''
 
     };
@@ -43,7 +43,7 @@
   $: {
     links = screenWidth > 900 ? [
       { name: 'Website', url: businesscard.url || undefined },
-      { name: 'Tableau Project', url: businesscard.tableau},
+      { name: 'Business Intelligence', url: businesscard.biz_int},
       { name: 'SimilarWeb', url: businesscard.similarweb },
       { name: 'LinkedIn', url: businesscard.linkedin },
       { name: 'BuiltWith', url: businesscard.builtwith },
@@ -56,7 +56,7 @@
       { name: 'Dun & Bradstreet', url: businesscard.dunandbradsheet },
     ] : [
       { name: 'Website', url: businesscard.url || undefined },
-      { name: 'Tableau Project', url: businesscard.tableau},
+      { name: 'Business Intelligence', url: businesscard.biz_int},
       { name: 'LinkedIn', url: businesscard.linkedin },
       { name: 'BuiltWith', url: businesscard.builtwith },
       { name: 'Glassdoor', url: businesscard.glassdoor },

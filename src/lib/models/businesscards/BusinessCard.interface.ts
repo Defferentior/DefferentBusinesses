@@ -16,6 +16,6 @@ export interface BusinessCardInterface {
     longitude: number | null;
     latitude: number | null;
     address: string | null;
-    tableau: string | null;
+    biz_int: string | null;
     category: string;
 }
