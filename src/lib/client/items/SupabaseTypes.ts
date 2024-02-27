@@ -13,7 +13,7 @@ export type Database = {
         Row: {
           address: string | null
           builtwith: string | null
-          category: string | null
+          category: string
           cbinsights: string | null
           craft: string | null
           crunchbase: string | null
@@ -28,14 +28,14 @@ export type Database = {
           priority: number | null
           similarweb: string | null
           tableau: string | null
-          url: string | null
+          url: string
           wappalyzer: string | null
           wikipedia: string | null
         }
         Insert: {
           address?: string | null
           builtwith?: string | null
-          category?: string | null
+          category: string
           cbinsights?: string | null
           craft?: string | null
           crunchbase?: string | null
@@ -50,14 +50,14 @@ export type Database = {
           priority?: number | null
           similarweb?: string | null
           tableau?: string | null
-          url?: string | null
+          url?: string
           wappalyzer?: string | null
           wikipedia?: string | null
         }
         Update: {
           address?: string | null
           builtwith?: string | null
-          category?: string | null
+          category?: string
           cbinsights?: string | null
           craft?: string | null
           crunchbase?: string | null
@@ -72,7 +72,7 @@ export type Database = {
           priority?: number | null
           similarweb?: string | null
           tableau?: string | null
-          url?: string | null
+          url?: string
           wappalyzer?: string | null
           wikipedia?: string | null
         }

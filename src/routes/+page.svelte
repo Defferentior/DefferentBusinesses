@@ -24,6 +24,8 @@
     let filterImage = false;
     let filterLocation = false;
     let filterTableau = false;
+    let categories = ['Forcetech', 'Strudistate', 'Bitware', 'Bizimerce','Medical','Gooducts','Entertainment'];
+    let selectedCategories = [...categories];
     let page: number = 1;
     let maxPage: number = 1;
     let pages: number[] = [1];
@@ -57,6 +59,7 @@ $: sortedBusinesses = data.Businesses ? [...data.Businesses].sort((a, b) => {
       && (!filterImage || business.image !== null)
       && (!filterLocation || (business.longitude !== null && business.latitude !== null))
       && (!filterTableau || business.tableau !== null)
+      && selectedCategories.includes(business.category)
   );
 
   $: if (maxPage === 0){
@@ -152,6 +155,14 @@ $: sortedBusinesses = data.Businesses ? [...data.Businesses].sort((a, b) => {
     <div>
       <input name="namesearch" type="text" bind:value={searchTerm} placeholder="Search..." /> Name
     </div>
+    {#each categories as category (category)}
+    <div class="category-container">
+      <label>
+        <input type="checkbox" bind:group={selectedCategories} value={category}>
+        {category}
+      </label>
+    </div>
+{/each}
   </div>
 
 
@@ -168,11 +179,11 @@ $: sortedBusinesses = data.Businesses ? [...data.Businesses].sort((a, b) => {
   </div>
   <div>
     <p>
-      Please, if you have an oppurtunity to hire me, I would be very grateful.
-    </p>
-    <p>
       I am extremely unemployed and so can't find a job or someone to hire me despite my resume, however I work consistently, I work hard, I'm a self starter, I find insights and I love data.</p>
   </div>
+  <p>
+    Please, if you have an oppurtunity to hire me, I would be very grateful.
+  </p>
 </body>
 
 
@@ -300,6 +311,11 @@ $: sortedBusinesses = data.Businesses ? [...data.Businesses].sort((a, b) => {
   }
   
 
+}
+
+.category-container {
+  display: inline-block;
+  margin-right: .5em; /* adjust as needed */
 }
 
 :global(.map) {
