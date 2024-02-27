@@ -173,7 +173,7 @@ $: sortedBusinesses = data.Businesses ? [...data.Businesses].sort((a, b) => {
       </label>
     </div>
     {/each}
-    <button on:click={toggleSelectAll}>
+    <button class="all-button" on:click={toggleSelectAll}>
       {selectedCategories.length === categories.length ? 'Select None' : 'Select All'}
     </button>
   </div> 
@@ -260,6 +260,10 @@ $: sortedBusinesses = data.Businesses ? [...data.Businesses].sort((a, b) => {
     margin: 0 2em;
     list-style: none;
     margin-bottom: .5em;
+  }
+
+  .all-button {
+    width: 8em;
   }
 
   .contactbar address {
