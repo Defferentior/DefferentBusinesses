@@ -280,12 +280,24 @@
   }
 
   .businesscard-link {
-    color: #9c892c; /* Paler gold links */
+    color: #c9b037; /* Paler gold links */
     transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
   }
 
   .businesscard-link:hover,
   .businesscard-link:focus {
+    background-color: var(--link-hover-background);
+    color: var(--link-hover-color);
+    text-decoration: none; /* Optional: remove if you want underline on hover */
+  }
+
+  .businesscard-biz_int {
+    color: #c9b037; /* Paler gold links */
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+  }
+
+  .businesscard-biz_int:hover,
+  .businesscard-biz_int:focus {
     background-color: var(--link-hover-background);
     color: var(--link-hover-color);
     text-decoration: none; /* Optional: remove if you want underline on hover */
