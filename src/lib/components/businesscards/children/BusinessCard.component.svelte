@@ -43,7 +43,6 @@
   $: {
     links = screenWidth > 900 ? [
       { name: 'Website', url: businesscard.url || undefined },
-      { name: 'Business Intelligence', url: businesscard.biz_int},
       { name: 'SimilarWeb', url: businesscard.similarweb },
       { name: 'LinkedIn', url: businesscard.linkedin },
       { name: 'BuiltWith', url: businesscard.builtwith },
@@ -56,7 +55,6 @@
       { name: 'Dun & Bradstreet', url: businesscard.dunandbradsheet },
     ] : [
       { name: 'Website', url: businesscard.url || undefined },
-      { name: 'Business Intelligence', url: businesscard.biz_int},
       { name: 'LinkedIn', url: businesscard.linkedin },
       { name: 'BuiltWith', url: businesscard.builtwith },
       { name: 'Glassdoor', url: businesscard.glassdoor },
@@ -81,11 +79,21 @@
         </a>
       </h2>
     </div>
+
     <div class="business-card-tags">
       <span>
         {businesscard.category}
       </span>
     </div>
+
+    <div class="businesscard-biz_ints">
+      {#if businesscard.biz_int}
+      <h4>
+        <a class="businesscard-biz_int" href={businesscard.biz_int}>Business Intelligence</a>
+      </h4>
+      {/if}
+    </div>
+
     <div class="businesscard-links">
       {#each links as link, i (link.name)}
         <a class="businesscard-link link-{i}" href={link.url}>{link.name}</a>
@@ -106,7 +114,7 @@
   flex-grow: 1;
   box-sizing: border-box;
   grid-template-areas:"image header header tags"
-                      "image links links links"
+                      "image biz_int biz_int biz_int"
                       "image links links links";
   grid-template-columns: min(20%,200px) 1fr auto;
   grid-template-rows: auto auto;
@@ -129,7 +137,8 @@
   grid-area: header;
   line-height: 1.4em;
   min-width: 0;
-  position: relative
+  position: relative;
+  height: 1.5em;
 }
 
 .businesscard-link {
@@ -145,12 +154,20 @@
 
 .businesscard-head-link {
   border-radius: .25rem;
+  padding-bottom: 0;
 }
 
 .businesscard-links {
   display: flex;
   grid-area: links;
   
+}
+
+.businesscard-biz_ints {
+  display: flex;
+  grid-area: biz_int;
+  font-size: 1.25em;
+  margin-left: .5em;
 }
 
 .businesscard-image {
@@ -219,6 +236,18 @@
 
   .businesscard-link:hover,
   .businesscard-link:focus {
+    background-color: var(--link-hover-background);
+    color: var(--link-hover-color);
+    text-decoration: none; /* Optional: remove if you want underline on hover */
+  }
+
+  .businesscard-biz_int {
+    color: #9c9a50; /* Less pastel, more pronounced gold */
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+  }
+
+  .businesscard-biz_int:hover,
+  .businesscard-biz_int:focus {
     background-color: var(--link-hover-background);
     color: var(--link-hover-color);
     text-decoration: none; /* Optional: remove if you want underline on hover */
