@@ -59,6 +59,10 @@ $: sortedBusinesses = data.Businesses ? [...data.Businesses].sort((a, b) => {
     if (a.priority === null) return -1;
     if (b.priority === null) return 1;
     return b.priority - a.priority;
+  }).sort((a,b) =>{
+    if (a.biz_int_index === null) return -1;
+    if (b.biz_int_index === null) return 1;
+    return b.biz_int_index - a.biz_int_index;
   }) : [];
 
   $: filteredBusinesses = sortedBusinesses.filter(business => 

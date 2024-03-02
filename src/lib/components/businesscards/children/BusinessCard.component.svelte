@@ -26,8 +26,8 @@
         cbinsights: '',
         wappalyzer: '',
         biz_int: '',
-        category: ''
-
+        category: '',
+        biz_int_index: -2,
     };
 
     onMount(() => {

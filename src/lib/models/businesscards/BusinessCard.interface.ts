@@ -18,4 +18,5 @@ export interface BusinessCardInterface {
     address: string | null;
     biz_int: string | null;
     category: string;
+    biz_int_index: number | null;
 }

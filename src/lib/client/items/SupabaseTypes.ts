@@ -13,6 +13,7 @@ export type Database = {
         Row: {
           address: string | null
           biz_int: string | null
+          biz_int_index: number
           builtwith: string | null
           category: string
           cbinsights: string | null
@@ -28,7 +29,6 @@ export type Database = {
           name: string
           priority: number | null
           similarweb: string | null
-          "tableau index": number
           url: string
           wappalyzer: string | null
           wikipedia: string | null
@@ -36,6 +36,7 @@ export type Database = {
         Insert: {
           address?: string | null
           biz_int?: string | null
+          biz_int_index?: number
           builtwith?: string | null
           category: string
           cbinsights?: string | null
@@ -51,7 +52,6 @@ export type Database = {
           name: string
           priority?: number | null
           similarweb?: string | null
-          "tableau index"?: number
           url?: string
           wappalyzer?: string | null
           wikipedia?: string | null
@@ -59,6 +59,7 @@ export type Database = {
         Update: {
           address?: string | null
           biz_int?: string | null
+          biz_int_index?: number
           builtwith?: string | null
           category?: string
           cbinsights?: string | null
@@ -74,7 +75,6 @@ export type Database = {
           name?: string
           priority?: number | null
           similarweb?: string | null
-          "tableau index"?: number
           url?: string
           wappalyzer?: string | null
           wikipedia?: string | null
