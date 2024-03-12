@@ -1,6 +1,7 @@
 <script lang="ts">
 
     import defferentiator from '$lib/images/defferentiator-circular-logo-25.png'
+    import linkedIn from '$lib/images/640px-LinkedIn.png'
 
 
 
@@ -13,8 +14,7 @@
     <h1>Secrets</h1> <img src={defferentiator} alt={"logo"} class={["logo"].join(' ')} />
   </div> 
 
-  <img src={defferentiator}  alt={"logo"} class={["logo","bounce"].join(' ')} />
-
+  <img src={linkedIn}  alt={"logo"} class={["logo","bounce"].join(' ')} />
 
   <div class="contactbar">
     <address> <a href="mailto:timemctigue@gmail.com">E-Mail</a></address>
