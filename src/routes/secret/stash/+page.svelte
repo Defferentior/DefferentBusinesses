@@ -2,7 +2,7 @@
 
     import defferentiator from '$lib/images/defferentiator-circular-logo-25.png'
     import linkedIn from '$lib/images/640px-LinkedIn.png'
-
+    import logoWithText from '$lib/images/LOGOwithText.png'
 
 
 
@@ -15,6 +15,8 @@
   </div> 
 
   <img src={linkedIn}  alt={"logo"} class={["logo","bounce"].join(' ')} />
+
+  <img src={logoWithText} alt={"logo"} class={["logo"].join(' ')} />
 
   <div class="contactbar">
     <address> <a href="mailto:timemctigue@gmail.com">E-Mail</a></address>
