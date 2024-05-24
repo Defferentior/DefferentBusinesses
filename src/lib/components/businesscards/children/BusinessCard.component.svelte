@@ -74,7 +74,7 @@
 <div class="businesscard">
     <div class="businesscard-header">
       <h2>
-        <a class="businesscard-head-link" style="text-decoration: none;" href={businesscard.url}>
+        <a class="businesscard-head-link" style="text-decoration: none;" href={"/business/"+businesscard.id}>
           {businesscard.name}
         </a>
       </h2>
