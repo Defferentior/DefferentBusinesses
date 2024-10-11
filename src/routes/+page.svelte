@@ -24,7 +24,7 @@
     let filterImage = false;
     let filterLocation = false;
     let filterBizInt = false;
-    let categories = ['Forcetech', 'Strudistate', 'Bitware', 'Bizimerce','Medical','Gooducts','Entertainment'];
+    let categories = ['Forcetech', 'Strudistate', 'Bitware', 'Bizimerce','Medical','Gooducts','Entertainment', 'Law'];
     let selectedCategories = [...categories];
     let page: number = 1;
     let maxPage: number = 1;
@@ -131,8 +131,8 @@ $: sortedBusinesses = data.Businesses ? [...data.Businesses].sort((a, b) => {
   </div> 
 
   <MapLibre
-  center={[-118.15,34]}
-    zoom={7.25}
+  center={[-85.26,40.88]}
+    zoom={5.0}
     class="map"
     standardControls
     style="https://basemaps.cartocdn.com/gl/positron-gl-style/style.json"
