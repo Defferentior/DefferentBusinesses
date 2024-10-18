@@ -18,6 +18,9 @@
     //import DefaultMarker from "$lib/components/mapcomponents/DefaultMarker.svelte";
     import Marker from "$lib/components/mapcomponents/Marker.svelte";
     import Popup from "$lib/components/mapcomponents/Popup.svelte"; 
+    import importStyle from "$lib/styles/positron-gl-style.json";
+    //import ControlGroup from '$lib/components/mapcomponents/ControlGroup.component.svelte';
+    //import ControlButton from '$lib/components/mapcomponents/ControlButton.component.svelte';
 
     let searchTerm = '';
     let filterLinkedin = false;
@@ -37,6 +40,9 @@
       pages = $PageStore.pages;
     }
 
+
+    
+
     const pageSize = 20;
 
     let filteredBusinesses: BusinessCardInterface[] = [];
@@ -55,14 +61,14 @@ $: sortedBusinesses = data.Businesses ? [...data.Businesses].sort((a, b) => {
     if (a.image === null) return 1;
     if (b.image === null) return -1;
     return a.image.localeCompare(b.image);
-  }).sort((a, b) => {
-    if (a.priority === null) return -1;
-    if (b.priority === null) return 1;
-    return b.priority - a.priority;
   }).sort((a,b) =>{
     if (a.biz_int_index === null) return -1;
     if (b.biz_int_index === null) return 1;
     return b.biz_int_index - a.biz_int_index;
+  }).sort((a, b) => {
+    if (a.priority === null) return -1;
+    if (b.priority === null) return 1;
+    return b.priority - a.priority;
   }) : [];
 
   $: filteredBusinesses = sortedBusinesses.filter(business => 
@@ -131,11 +137,12 @@ $: sortedBusinesses = data.Businesses ? [...data.Businesses].sort((a, b) => {
   </div> 
 
   <MapLibre
-  center={[-85.26,40.88]}
-    zoom={5.0}
+
+  center={[-98.6,39.8]}
+    zoom={3}
     class="map"
     standardControls
-    style="https://basemaps.cartocdn.com/gl/positron-gl-style/style.json"
+    style={importStyle}
   >
   {#each markers as { lngLat, label, name }, i (label)}
     <Marker
@@ -152,6 +159,22 @@ $: sortedBusinesses = data.Businesses ? [...data.Businesses].sort((a, b) => {
     </Marker>
   {/each}
   </MapLibre>
+
+  <!---
+  <Control class="flex flex-col gap-y-2">
+    <ControlGroup>
+      <ControlButton
+        on:click={() => {
+          map.flyTo({
+            center: [-5, 54],
+            zoom: 4,
+          });
+        }}
+      >
+        UK
+      </ControlButton>
+      </ControlGroup>
+      </Control>-->
 
   <h3>Only Include Businesses With:  </h3>
 

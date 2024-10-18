@@ -13,7 +13,6 @@
         business.name.toLowerCase().includes(searchTerm.toLowerCase()) 
         && (!filterLinkedin || business.linkedin !== null)
         && (!filterImage || business.image !== null)
-        && (!filterTableau || business.tableau !== null)
     );
 </script>
 
